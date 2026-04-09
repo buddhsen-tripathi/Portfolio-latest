@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import XTwitterIcon from "@/components/icons/x-twitter";
 import GithubIcon from "@/components/icons/github";
 import LinkedinIcon from "@/components/icons/linkedin";
@@ -63,13 +63,47 @@ function SocialButton({ label, href, icon, external }) {
   );
 }
 
+const WaveEmoji = () => {
+  const [phase, setPhase] = useState("idle"); 
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    setPhase("waving");
+    const timer = setTimeout(() => setPhase("grayscale"), 700);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleMouseEnter = () => {
+    setKey((k) => k + 1);
+    setPhase("hover-wave");
+  };
+
+  const handleMouseLeave = () => {
+    setPhase("grayscale");
+  };
+
+  const isWaving = phase === "waving" || phase === "hover-wave";
+  const isGrayscale = phase === "grayscale";
+
+  return (
+    <span
+      key={key}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`inline-block origin-[70%_70%] cursor-default transition-all duration-500 ${isWaving ? "animate-wave-slow" : ""} ${isGrayscale ? "grayscale" : ""}`}
+    >
+      👋🏻
+    </span>
+  );
+};
+
 const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
   return (
     <div className="mx-auto flex flex-col gap-10 md:max-w-4xl">
       <div className="flex flex-col gap-6">
         <div className={GeistPixelSquare.className}>
           <p className="mb-3 font-doto text-xs text-muted-foreground md:text-sm">
-            Yo I&apos;m <span className="inline-block origin-[70%_70%] grayscale transition-all duration-300 hover:animate-wave hover:grayscale-0">👋🏻</span>
+            Yo I&apos;m <WaveEmoji />
           </p>
 
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
