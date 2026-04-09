@@ -131,7 +131,7 @@ export const research = [
   {
     title: "A Novel Data-Centric Transformer Fine-Tuning: A Modular Framework for Rapid Domain Adaptation and Deployment",
     category: "Large Language Models & Domain Adaptation",
-    description: "This research demonstrates a data-centric, hardware-light workflow for fine-tuning transformers that sidesteps the drawbacks of costly LLM APIs. By automatically scraping high-signal web content and converting it into Q&A pairs, we fine-tune a GPT-2-Medium model (355M parameters) in \u22487 minutes on a single RTX-3060. The resulting assistant achieves 67.3% accuracy (+34% over base model) with 1.4s median latency and $0 per call cost.",
+    description: "A data-centric, hardware-light workflow for fine-tuning transformers that sidesteps costly LLM APIs. Automatically scrapes high-signal web content and converts it into Q&A pairs to fine-tune a GPT-2-Medium model (355M parameters) in ~7 minutes on a single RTX-3060. Achieves 67.3% accuracy (+34% over base model) with 1.4s median latency and zero inference cost.",
     techstacks: ["GPT-2", "LoRA", "8-bit Adam", "Domain Adaptation", "Next.js", "Q&A Generation", "Fine-tuning"],
     status: "under-review",
     link: "#",
