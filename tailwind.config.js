@@ -19,6 +19,7 @@ const config = {
       fontFamily: {
         inter: ["var(--font-inter)"],
         cera: ["var(--font-cera)"],
+        doto: ["'Doto'", "sans-serif"],
       },
       fontSize: {
         sm: "0.8rem",

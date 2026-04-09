@@ -11,8 +11,9 @@ import {
 import ContactForm from "./contact-form";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
-import { FaArrowRight } from "react-icons/fa6";
 import { GeistPixelSquare } from "geist/font/pixel";
+import ButtonCursorIcon from "@/components/icons/button-cursor";
+import { CornerBrackets } from "@/components/ui/corner-brackets";
 
 const ContactDialog = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,11 +56,13 @@ const ContactDialog = () => {
   return (
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <Button size="lg">
-            Contact Me <FaArrowRight className="ml-2" size="14px" />
-          </Button>
+          <CornerBrackets>
+            <Button size="sm">
+              <ButtonCursorIcon className="mr-1.5 h-3 w-3" /> Contact Me
+            </Button>
+          </CornerBrackets>
         </DialogTrigger>
-        <DialogContent className={`${GeistPixelSquare.className} text-sm`}>
+        <DialogContent className={`${GeistPixelSquare.className} text-sm border-white/[0.08]`}>
           <DialogHeader>
             <DialogTitle>Contact Me</DialogTitle>
             <DialogDescription>

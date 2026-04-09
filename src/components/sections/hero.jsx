@@ -1,43 +1,91 @@
 "use client";
 import React from "react";
-import _ from "lodash";
-import { FaClipboard, FaDiscord, FaGithub, FaLinkedin,  } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { RiTwitterXLine } from "react-icons/ri";
 import { IoIosMail } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 import ContactDialog from "@/components/layout/contact-dialog";
-import {  Zen_Dots } from "next/font/google";
 import { toast } from "sonner";
-import GitHubStreak from "../Streaks";
-import { Rss } from "lucide-react";
 import Link from "next/link";
 import { GeistPixelSquare } from "geist/font/pixel";
-import { GithubGraph } from "../github-graph";
-const zenDots = Zen_Dots({ subsets: ["latin"], weight: "400" });
-const Hero = () => {
+import GitHubContributionGraph from "./contribution-graph";
+import ClipboardIcon from "@/components/icons/clipboard";
+import { CornerBrackets } from "@/components/ui/corner-brackets";
+
+const socialLinks = [
+  {
+    label: "Twitter",
+    href: "https://x.com/sh17va",
+    icon: <RiTwitterXLine size="13px" />,
+    external: true,
+  },
+  {
+    label: "Github",
+    href: "https://github.com/shivabhattacharjee",
+    icon: <FaGithub size="13px" />,
+    external: true,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/shiva-bhattacharjee/",
+    icon: <FaLinkedin size="13px" />,
+    external: true,
+  },
+  {
+    label: "Email",
+    href: "mailto:hello@theshiva.xyz",
+    icon: <IoIosMail size="14px" />,
+    external: true,
+  },
+]
+
+function SocialButton({ label, href, icon, external }) {
+  return (
+    <Link
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+    >
+      <CornerBrackets>
+        <Button size="sm" variant="noShadow">
+          {icon}
+          <span className="ml-1.5">{label}</span>
+        </Button>
+      </CornerBrackets>
+    </Link>
+  )
+}
+
+const Hero = ({ contributionData = [] }) => {
   return (
     <div className="mx-auto flex flex-col gap-10 md:max-w-4xl">
-      <div className="flex flex-col justify-center gap-10 md:flex-row md:justify-between">
-        <div className="order-last md:order-1 md:w-[500px]">
-          <div
-            className={`mb-6 flex flex-col gap-y-2 text-center md:text-start ${GeistPixelSquare.className}`}
-          >
-            <h1 className={`text-3xl md:text-4xl font-bold`}>Shiva Bhattacharjee</h1>
-            <h2 className={`text-sm md:text-xl font-medium uppercase tracking-widest`}>
-              Applied AI Engineer
-            </h2>
-            <p className={`text-sm md:text-base leading-relaxed opacity-90`}>
-              I build AI agents and workflows. I also work on fine-tuning
-              pipelines, prompt engineering, and computer vision research.
-            </p>
+      <div className="flex flex-col gap-6">
+
+        <div className={GeistPixelSquare.className}>
+          <p className="mb-3 text-xs font-doto text-muted-foreground md:text-sm">
+           Hello I&apos;m 👋
+          </p>
+
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h1 className="text-3xl font-bold uppercase tracking-tight md:text-5xl">
+              Shiva
+            </h1>
+            <a href="https://x.com/sh17va" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground md:text-base">
+              / @sh17va
+            </a>
           </div>
-          <div
-            className={`flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0 ${GeistPixelSquare.className}`}
-          >
-            <ContactDialog />
+
+          <p className="mt-2 text-[11px] font-medium uppercase tracking-widest text-muted-foreground md:text-sm">
+            Applied AI Engineer
+          </p>
+        </div>
+
+        <div className={`flex flex-row items-center gap-3 ${GeistPixelSquare.className}`}>
+          <ContactDialog />
+          <span className="text-[10px] opacity-75 text-muted-foreground md:text-xs">OR</span>
+          <CornerBrackets>
             <Button
-              size="lg"
-              className="w-full md:w-48"
+              size="sm"
               onClick={() => {
                 navigator.clipboard.writeText("npx shivadev");
                 toast.success("Copied to clipboard", {
@@ -45,56 +93,47 @@ const Hero = () => {
                 });
               }}
             >
-              npx shivadev <FaClipboard className="ml-2" size="14px" />
+              <ClipboardIcon className="mr-1.5 h-3 w-3" /> npx shivadev
             </Button>
-          </div>
-          <div className="mt-10 flex justify-center space-x-5 md:justify-start">
-            <a href="https://x.com/sh17va" target="_blank">
-              <RiTwitterXLine size="24px" className="opacity-60 hover:opacity-100" />
-            </a>
-            <a href="https://www.linkedin.com/in/sh1xva/" target="_blank">
-              <FaLinkedin size="24px" className="opacity-60 hover:opacity-100" />
-            </a>
-            <a href="mailto:hello@theshiva.xyz" target="_blank">
-              <IoIosMail size="24px" className="opacity-60 hover:opacity-100" />
-            </a>
-            <a href="https://github.com/shivabhattacharjee" target="_blank">
-              <FaGithub size="24px" className="opacity-60 hover:opacity-100" />
-            </a>
-            <Link
-              href="/rss.xml"
-              target="_blank"
-              className="flex items-center justify-center space-x-2 transition-colors hover:text-accent-foreground"
-              title="RSS Feed"
-            >
-              <Rss size="24px" className="opacity-60 hover:opacity-100" />
-            </Link>
-          </div>
+          </CornerBrackets>
         </div>
       </div>
-      <div className="space-y-6">
+
+      <div className="space-y-8">
         <div>
-          <h5
-            className={`mb-4 font-cera text-3xl md:text-2xl font-medium ${zenDots.className}`}
-          >
+          <h5 className="mb-4 font-cera text-2xl font-medium md:text-3xl font-doto">
             About Me
           </h5>
-          <p className="mb-4 text-sm md:text-lg">
-            I&apos;m a 20-year-old Full Stack + AI Engineer who builds
-            production-ready AI systems and researches SLMs and Computer Vision.
-            Currently, I&apos;m working at an AI-powered jewelry creation startup,
-            building generative design pipelines and multi-modal AI workflows
-            that transform creative concepts into 3D-ready assets. I work with
-            OpenAI, Claude, and open-source models to create agentic workflows
-            using LangChain and Vercel AI SDK. I&apos;ve contributed to 5+
-            research projects and developed fine-tuning pipelines for both SLMs
-            and LLMs.
+          <p className="text-xs md:text-base">
+            Hi! I&apos;m Shiva Bhattacharjee — an Applied AI Engineer. I
+            love development, making stuff, and experimenting with whatever
+            catches my interest. Most of my work revolves around LLMs, agentic
+            systems, and building developer tools on top of them. I&apos;ve
+            spent time working on complex multi-model pipelines — orchestrating
+            parallel image generation calls, chaining inference steps with
+            memory-augmented context, and wiring up distributed task queues to
+            keep everything running at scale. I&apos;ve won 5 hackathons and
+            was a Smart India Hackathon finalist in my first semester. I enjoy
+            the messy, behind-the-scenes infrastructure work just as much as
+            shipping the final product.
           </p>
         </div>
+
+        <div>
+          <p className="mb-3 text-xs text-muted-foreground md:text-sm">
+            My <span className="font-semibold text-foreground">social links</span> if you wish to connect with me
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {socialLinks.map(({ label, href, icon, external }) => (
+              <SocialButton key={label} label={label} href={href} icon={icon} external={external} />
+            ))}
+          </div>
+        </div>
+
+        
+          <GitHubContributionGraph data={contributionData} />
+       
       </div>
-  
-     <GitHubStreak />
-    
     </div>
   );
 };

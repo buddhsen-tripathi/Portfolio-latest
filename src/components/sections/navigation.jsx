@@ -1,137 +1,105 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import TransitionLink from "@/components/TransitionLink";
-import { MdOutlineRestaurantMenu } from "react-icons/md";
-import { FaHamburger } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
-import Toggle from "@/components/toggle";
-import { HiOutlineMenuAlt2 } from "react-icons/hi";
-import { FaXmark } from "react-icons/fa6";
+import { useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 import { navLinks } from "@/constants";
-import {Press_Start_2P} from "next/font/google"
-const pressStartFont = Press_Start_2P({subsets: ["latin"], weight : "400"});
+import MoonIcon from "@/components/icons/moon";
+import SunIcon from "@/components/icons/sun";
+import HouseIcon from "@/components/icons/house";
+import CodeEditorIcon from "@/components/icons/sparkles";
+import SuitcaseIcon from "@/components/icons/briefcase";
+import MagnifierIcon from "@/components/icons/beaker";
+import {
+  Tabs,
+  TabsList,
+  TabsHighlight,
+  TabsHighlightItem,
+  TabsTrigger,
+} from "@/components/animate-ui/primitives/animate/tabs";
 
-const NavigationBar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const navMenuRef = useRef(null);
+const iconMap = {
+  "/": HouseIcon,
+  "/projects": CodeEditorIcon,
+  "/experience": SuitcaseIcon,
+  "/research": MagnifierIcon,
+};
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+function NavigationBar() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [activeTab, setActiveTab] = useState(pathname);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setActiveTab(pathname);
+  }, [pathname]);
+
+  const handleNavigation = (val) => {
+    setActiveTab(val);
+    router.push(val);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+  const switchTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (isMenuOpen && window.innerWidth >= 1024) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        isMenuOpen &&
-        navMenuRef.current &&
-        !navMenuRef.current.contains(e.target)
-      ) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isMenuOpen]);
+  const toggleMode = () => {
+    if (!document.startViewTransition) {
+      switchTheme();
+      return;
+    }
+    const root = document.documentElement;
+    root.classList.add("theme-transition");
+    const transition = document.startViewTransition(switchTheme);
+    transition.finished.finally(() => {
+      root.classList.remove("theme-transition");
+    });
+  };
 
   return (
-    <>
-      <div className="h-24 lg:hidden" />
-      <div
-        className={`fixed top-0 left-0 right-0 z-20 flex justify-between gap-5 px-4 md:px-8 transition-colors duration-300 ease-in-out lg:relative lg:bg-transparent ${
-          isScrolled ? "bg-main backdrop-blur-sm lg:bg-transparent" : "bg-transparent"
-        }`}
-      >
-        <Toggle />
-        <nav className="max-container flex items-center justify-end">
-          <div className="hidden md:block">
-            <ul className= {` flex flex-1 items-center gap-14 max-lg:hidden`}>
-              {navLinks.map((navLink, index) => {
+    <nav className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 md:bottom-auto md:top-6">
+      <div className="flex items-center rounded-full border border-black/[0.08] bg-black/[0.05] px-1 py-1 backdrop-blur-xl dark:border-white/[0.08] dark:bg-white/[0.05] md:px-2">
+        <Tabs value={activeTab} onValueChange={handleNavigation}>
+          <TabsHighlight
+            className="absolute z-0 inset-0 rounded-full bg-black/[0.08] dark:bg-white/[0.08]"
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          >
+            <TabsList className="flex items-center">
+              {navLinks.map((link) => {
+                const Icon = iconMap[link.path];
+
                 return (
-                  <li key={index} className={` ${pressStartFont.className} uppercase`}>
-                    <TransitionLink href={navLink.path}>
-                      <p className="text-md font-cera">{navLink.name}</p>
-                    </TransitionLink>
-                  </li>
+                  <TabsHighlightItem key={link.path} value={link.path}>
+                    <TabsTrigger
+                      value={link.path}
+                      className="flex flex-col items-center gap-0.5 rounded-full px-3.5 py-1.5 text-black/40 transition-colors duration-200 data-[state=active]:text-black dark:text-white/40 dark:data-[state=active]:text-white md:flex-row md:gap-2 md:px-5 md:py-2"
+                    >
+                      {Icon && <Icon className="h-[18px] w-[18px] md:h-[18px] md:w-[18px]" strokeWidth={1.5} />}
+                      <span className="text-[9px] font-medium tracking-wide md:text-[11px]">
+                        {link.name}
+                      </span>
+                    </TabsTrigger>
+                  </TabsHighlightItem>
                 );
               })}
-            </ul>
-          </div>
-          <Button
-            variant="ghost"
-            className="hidden max-lg:block"
-            onClick={toggleMenu}
-          >
-            {isMenuOpen ? <MdOutlineRestaurantMenu size="20px" /> : <FaHamburger size="20px" />}
-          </Button>
-        </nav>
+            </TabsList>
+          </TabsHighlight>
+        </Tabs>
+
+        <div className="mx-0.5 h-8 w-px bg-black/[0.1] dark:bg-white/[0.1] md:mx-1" />
+
+        <button
+          onClick={toggleMode}
+          className="relative flex h-9 w-9 items-center justify-center rounded-full text-black/40 transition-colors duration-200 hover:text-black/70 dark:text-white/40 dark:hover:text-white/70"
+        >
+          <SunIcon className="h-[18px] w-[18px] rotate-0 scale-100 transition-all duration-500 ease-in-out dark:-rotate-90 dark:scale-0 md:h-[22px] md:w-[22px]" />
+          <MoonIcon className="absolute h-[18px] w-[18px] rotate-90 scale-0 transition-all duration-500 ease-in-out dark:rotate-0 dark:scale-100 md:h-[22px] md:w-[22px]" />
+          <span className="sr-only">Toggle theme</span>
+        </button>
       </div>
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.nav
-            ref={navMenuRef}
-            initial={{ translateX: "100%" }}
-            animate={{ translateX: "0%" }}
-            exit={{ translateX: "100%" }}
-            transition={{
-              duration: 0.3,
-              type: "tween",
-              ease: "easeInOut",
-            }}
-            style={{ overflow: "hidden" }}
-            className="fixed right-0 z-10 flex h-screen w-[100%] border-primary bg-background"
-          >
-            <ul className="mx-auto flex h-full flex-col items-center justify-center gap-10 lg:hidden">
-              {navLinks.map((navLink, index) => {
-                return (
-                  <li key={index} className={`${pressStartFont.className}  uppercase`}>
-                    <TransitionLink href={navLink.path} onClick={() => setIsMenuOpen(false)}>
-                      <p className="font-cera text-2xl">
-                        {navLink.name}
-                      </p>
-                    </TransitionLink>
-                  </li>
-                );
-              })}
-            </ul>
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </>
+    </nav>
   );
-};
+}
 
 export default NavigationBar;

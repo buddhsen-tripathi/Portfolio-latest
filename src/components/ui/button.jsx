@@ -5,15 +5,21 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center text-primary justify-center whitespace-nowrap rounded-base text-sm font-cera ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap font-cera text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "bg-main border-2 border-primary shadow-dark dark:shadow-light hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none dark:hover:translate-x-boxShadowX dark:hover:translate-y-boxShadowY dark:hover:shadow-none",
-        noShadow: "bg-main border-2 border-black",
-        link: "underline-offset-4 hover:underline",
-        neutral: "bg-white border-2 border-black",
+          "border border-black/[0.1] bg-black/[0.04] text-foreground hover:bg-black/[0.08] dark:border-white/[0.1] dark:bg-white/[0.06] dark:hover:bg-white/[0.12]",
+        noShadow:
+          "border border-black/[0.1] bg-black/[0.04] text-foreground dark:border-white/[0.1] dark:bg-white/[0.06]",
+        link: "underline-offset-4 hover:underline text-foreground",
+        neutral:
+          "bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90",
+        outline:
+          "border border-black/[0.1] bg-transparent text-foreground hover:bg-black/[0.04] dark:border-white/[0.1] dark:hover:bg-white/[0.06]",
+        ghost:
+          "hover:bg-black/[0.04] text-foreground dark:hover:bg-white/[0.06]",
       },
       size: {
         default: "h-10 px-4 py-2",

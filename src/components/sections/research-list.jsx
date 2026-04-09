@@ -12,7 +12,7 @@ const TruncatedTitle = ({ title, maxLength = 60 }) => {
   const displayTitle = isExpanded ? title : title.slice(0, maxLength) + (isTruncated ? "..." : "");
 
   if (!isTruncated) {
-    return <h2 className="text-xl font-bold">{title}</h2>;
+    return <h2 className="text-sm font-bold md:text-xl">{title}</h2>;
   }
 
   return (
@@ -32,13 +32,13 @@ const TruncatedTitle = ({ title, maxLength = 60 }) => {
 
       <div className="md:hidden">
         <h2
-          className="text-xl font-bold cursor-pointer"
+          className="text-sm font-bold cursor-pointer"
           onClick={() => setIsExpanded(!isExpanded)}
         >
           {displayTitle}
           {isTruncated && (
-            <span className="text-sm text-muted-foreground ml-2">
-              {isExpanded ? "(click to collapse)" : "(click to expand)"}
+            <span className="text-[10px] text-muted-foreground ml-1.5">
+              {isExpanded ? "(collapse)" : "(expand)"}
             </span>
           )}
         </h2>
@@ -51,30 +51,29 @@ const ExpandableAbstract = ({ description }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="space-y-2">
-      <h3 className="text-sm font-semibold text-foreground">Abstract</h3>
-
+    <div className="space-y-1.5 md:space-y-2">
+      <h3 className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground md:text-sm md:normal-case md:tracking-normal md:text-foreground">Abstract</h3>
 
       <div className="hidden md:block">
-        <p className="text-base leading-relaxed">
+        <p className="text-sm leading-relaxed md:text-base">
           {description}
         </p>
       </div>
 
       <div className="md:hidden">
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           {isExpanded ? (
-            <p className="text-base leading-relaxed">
+            <p className="text-xs leading-relaxed">
               {description}
             </p>
           ) : (
-            <p className="text-base leading-relaxed">
+            <p className="text-xs leading-relaxed">
               {description.slice(0, 120)}...
             </p>
           )}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-sm text-primary hover:text-primary/80 font-medium"
+            className="text-[10px] text-primary hover:text-primary/80 font-medium"
           >
             {isExpanded ? "Show Less" : "Read More"}
           </button>
@@ -116,26 +115,25 @@ const ResearchList = ({ research }) => {
                         </Badge>
                       )}
                     </div>
-                    <p className="text-sm text-muted-foreground font-medium">
+                    <p className="text-[10px] font-medium text-muted-foreground md:text-sm">
                       {item.category}
                     </p>
                   </div>
 
                   <ExpandableAbstract description={item.description} />
 
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                  <div className="flex flex-wrap items-center gap-3 text-[10px] text-muted-foreground md:gap-4 md:text-sm">
                     <div className="flex items-center gap-1 min-w-0">
-                      <FaBook size={12} className="flex-shrink-0" />
-                      <span className="truncate w-72" title={item.journal}>{item.journal}</span>
+                      <FaBook size={10} className="flex-shrink-0" />
+                      <span className="truncate w-48 md:w-72" title={item.journal}>{item.journal}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <FaCalendar size={12} />
+                      <FaCalendar size={10} />
                       <span>{item.year}</span>
                     </div>
                     {item.collaboration && (
                       <div className="flex items-center gap-1">
-                        <GiArchiveResearch size={12} />
-
+                        <GiArchiveResearch size={10} />
                         <span>{item.collaboration}</span>
                       </div>
                     )}

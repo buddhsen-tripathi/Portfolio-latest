@@ -14,7 +14,7 @@ const FloatingSkull = () => {
     <>
       {/* Skull Button - Fixed position that doesn't affect layout */}
       <motion.div
-        className="fixed bottom-8 bg-black/5 dark:bg-white/10 p-3 rounded-full right-8 z-10 cursor-pointer"
+        className="fixed bottom-24 md:bottom-8 bg-black/5 dark:bg-white/10 p-3 rounded-full right-8 z-10 cursor-pointer"
         transition={{
           duration: 2,
           repeat: Infinity,

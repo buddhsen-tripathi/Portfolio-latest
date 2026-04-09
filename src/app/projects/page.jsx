@@ -7,23 +7,17 @@ export const metadata = {
 };
 
 const Projects = () => {
-
   return (
     <Layout
       showHeader
       title="Projects"
       subtitle="A collection of things I've built."
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="flex w-full  py-2 md:px-6 md:py-6"
-            >
-              <ProjectCard {...project} />
-            </div>
-          ))}
-          </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project, index) => (
+          <ProjectCard key={index} {...project} />
+        ))}
+      </div>
     </Layout>
   );
 };

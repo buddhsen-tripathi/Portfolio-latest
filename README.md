@@ -1,16 +1,6 @@
 <img width="7980" height="4932" alt="image" src="https://github.com/user-attachments/assets/1da6735c-de71-4a52-901d-536435346d17" />
 
 
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 14
-- **Styling**: Tailwind CSS
-- **UI Components**: Radix UI primitives
-- **Animations**: Framer Motion
-- **Icons**: React Icons & Lucide React
-- **Forms**: React Hook Form with Zod validation
-- **Package Manager**: Bun (recommended) or npm
-
 ## 📦 Installation
 
 ### Prerequisites

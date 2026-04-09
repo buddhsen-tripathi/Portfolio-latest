@@ -2,7 +2,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import NavigationBar from "@/components/sections/navigation";
 import Footer from "@/components/sections/footer";
-import FloatingSkull from "@/components/Floating";
+
 import OnekoCat from "@/components/OnekoCat";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -92,8 +92,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#0B0D0E" />
         <meta name="color-scheme" content="dark light" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -102,18 +105,18 @@ export default function RootLayout({ children }) {
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="grid min-h-[100dvh] grid-rows-[auto_1fr_auto] overflow-x-hidden">
-            <NavigationBar />
-            <main className={`${GeistPixelSquare.className} px-6 md:px-0`}>
+          <div className="grid min-h-[100dvh] grid-rows-[1fr_auto] overflow-x-hidden">
+            <main className={`${GeistPixelSquare.className} px-6 md:px-0 pt-14 `}>
               <OnekoCat/>
               {children}
-              <FloatingSkull />
+
             </main>
             <Footer />
+            <NavigationBar />
             <Toaster />
           </div>
         </ThemeProvider>
