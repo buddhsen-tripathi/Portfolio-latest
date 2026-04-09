@@ -12,6 +12,7 @@ import { GeistPixelSquare } from "geist/font/pixel";
 import GitHubContributionGraph from "./contribution-graph";
 import ClipboardIcon from "@/components/icons/clipboard";
 import { CornerBrackets } from "@/components/ui/corner-brackets";
+import { notableAchievements } from "@/constants";
 
 const socialLinks = [
   {
@@ -197,6 +198,30 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
               lifetimeTotal={lifetimeTotal}
             />
           </div>
+        </div>
+
+        <div>
+          <h5 className="mb-4 font-doto text-2xl font-medium md:text-3xl">
+            Notable achievements
+          </h5>
+          <ul className="space-y-6 text-xs md:text-base">
+            {notableAchievements.map(({ title, body, link, linkLabel }) => (
+              <li key={title} className="border-l-2 border-muted-foreground/25 pl-4">
+                <span className="font-semibold text-foreground">{title}. </span>
+                <span className="text-muted-foreground">{body}</span>
+                {link && (
+                  <Link
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-1 underline underline-offset-2 text-foreground/70 hover:text-foreground transition-colors"
+                  >
+                    {linkLabel}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

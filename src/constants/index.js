@@ -17,6 +17,31 @@ export const navLinks = [
   },
 ];
 
+export const notableAchievements = [
+  {
+    title: "Smart India Hackathon",
+    body: "Made it to SIH 2023 in my very first semester of college. Didn't really know what I was doing but figured it out.",
+  },
+  {
+    title: "Hackathons",
+    body: "Won 5 hackathons, mostly building AI stuff. WasteEasy was probably the one I'm proudest of, it rewards people for dumping waste responsibly. Took home Rs. 30,000 from ADTU and got called out as a unique tech startup at an IIM Shillong entrepreneurship event.",
+    link: "https://github.com/ShivaBhattacharjee/WasteEasy",
+    linkLabel: "WasteEasy on GitHub",
+  },
+  {
+    title: "Rise In bounty",
+    body: "Got a bounty from Rise In for a project that lets people lend money on Ethereum and build an actual credit score on-chain. No banks, just smart contracts.",
+    link: "https://github.com/ShivaBhattacharjee/lending-blockchain",
+    linkLabel: "lending-blockchain on GitHub",
+  },
+  {
+    title: "Side project at scale",
+    body: "Built AnimeTrix, an anime streaming site, hit around 1,500 users and was handling 100 concurrent viewers at peak using web scraping and some creative infra decisions. Had to take it down after a DMCA. The repo still has ~190 stars.",
+    link: "https://github.com/ShivaBhattacharjee/AnimeTrix-next",
+    linkLabel: "AnimeTrix on GitHub",
+  },
+];
+
 export const intros = [
   "Software Engineer",
   "Graphic Designer",
