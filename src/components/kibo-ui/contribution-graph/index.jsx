@@ -31,7 +31,7 @@ const DEFAULT_MONTH_LABELS = [
 const DEFAULT_LABELS = {
   months: DEFAULT_MONTH_LABELS,
   weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-  totalCount: "{{count}} activities in {{year}}",
+  totalCount: "Total {{count}} contributions in lifetime",
   legend: {
     less: "Less",
     more: "More",
@@ -332,7 +332,7 @@ export const ContributionGraphTotalCount = ({
         ? labels.totalCount
             .replace("{{count}}", String(totalCount))
             .replace("{{year}}", String(year))
-        : `${totalCount} activities in ${year}`}
+        : `Total ${totalCount} contributions in lifetime`}
     </div>
   );
 };

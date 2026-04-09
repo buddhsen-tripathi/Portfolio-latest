@@ -56,7 +56,7 @@ function SocialButton({ label, href, icon, external }) {
   )
 }
 
-const Hero = ({ contributionData = [] }) => {
+const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
   return (
     <div className="mx-auto flex flex-col gap-10 md:max-w-4xl">
       <div className="flex flex-col gap-6">
@@ -132,7 +132,7 @@ const Hero = ({ contributionData = [] }) => {
 
         <div className="w-[calc(100vw-2rem)] overflow-x-auto md:w-auto">
           <div className="min-w-[700px]">
-            <GitHubContributionGraph data={contributionData} />
+            <GitHubContributionGraph data={contributionData} lifetimeTotal={lifetimeTotal} />
           </div>
         </div>
       </div>

@@ -7,12 +7,12 @@ export const metadata = {
 };
 
 export default async function About() {
-  const contributionData = await fetchGitHubContributions();
+  const { contributions, lifetimeTotal } = await fetchGitHubContributions();
 
   return (
     <div className="overflow-x-hidden">
       <Layout>
-        <Hero contributionData={contributionData} />
+        <Hero contributionData={contributions} lifetimeTotal={lifetimeTotal} />
       </Layout>
     </div>
   );

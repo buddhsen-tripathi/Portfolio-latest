@@ -10,7 +10,7 @@ import {
   ContributionGraphTotalCount,
 } from "@/components/kibo-ui/contribution-graph";
 
-const GitHubContributionGraph = ({ data = [] }) => {
+const GitHubContributionGraph = ({ data = [], lifetimeTotal }) => {
   const [tooltip, setTooltip] = useState(null);
 
   const handleMouseEnter = useCallback((e, activity) => {
@@ -31,7 +31,7 @@ const GitHubContributionGraph = ({ data = [] }) => {
 
   return (
     <div className="relative">
-      <ContributionGraph data={data} fontSize={11} blockSize={10} blockMargin={3}>
+      <ContributionGraph data={data} fontSize={11} blockSize={10} blockMargin={3} totalCount={lifetimeTotal}>
         <ContributionGraphCalendar>
           {({ activity, dayIndex, weekIndex }) => (
             <g
