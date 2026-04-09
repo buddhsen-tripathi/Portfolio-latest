@@ -77,6 +77,19 @@ const config = {
         boxShadowX: "4px",
         boxShadowY: "4px",
       },
+      keyframes: {
+        wave: {
+          "0%, 100%": { transform: "rotate(0deg)" },
+          "20%": { transform: "rotate(20deg)" },
+          "40%": { transform: "rotate(-15deg)" },
+          "60%": { transform: "rotate(15deg)" },
+          "80%": { transform: "rotate(-10deg)" },
+        },
+      },
+      animation: {
+        wave: "wave 1s ease-in-out 1",
+        "wave-slow": "wave 1.5s ease-in-out 1",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

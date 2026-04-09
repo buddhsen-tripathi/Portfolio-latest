@@ -69,7 +69,7 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
       <div className="flex flex-col gap-6">
         <div className={GeistPixelSquare.className}>
           <p className="mb-3 font-doto text-xs text-muted-foreground md:text-sm">
-            Yo I&apos;m 👋
+            Yo I&apos;m <span className="inline-block origin-[70%_70%] grayscale transition-all duration-300 hover:animate-wave hover:grayscale-0">👋🏻</span>
           </p>
 
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
