@@ -99,7 +99,7 @@ const ResearchList = ({ research }) => {
           {research.map((item, index) => (
             <div
               key={index}
-              className="border-b border-border pb-6 last:border-b-0"
+              className="border-b border-border py-6 first:pt-0 last:border-b-0"
             >
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                 <div className="flex-1 space-y-3">
