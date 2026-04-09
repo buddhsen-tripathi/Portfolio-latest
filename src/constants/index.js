@@ -40,7 +40,7 @@ export const notableAchievements = [
   },
   {
     title: "Side project at scale",
-    body: "Built AnimeTrix, an anime streaming site, hit around 1,500 users and was handling 100 concurrent viewers at peak using web scraping and some creative infra decisions. Had to take it down after a DMCA. The repo still has ~190 stars.",
+    body: "Built AnimeTrix, an anime streaming site, hit around 15,000 users and was handling 100 concurrent viewers at peak using web scraping and some creative infra decisions. Had to take it down after a DMCA. The repo still has ~190 stars.",
     link: "https://github.com/ShivaBhattacharjee/AnimeTrix-next",
     linkLabel: "AnimeTrix on GitHub",
   },
