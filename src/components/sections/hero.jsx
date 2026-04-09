@@ -80,7 +80,7 @@ const Hero = ({ contributionData = [] }) => {
           </p>
         </div>
 
-        <div className={`flex flex-row items-center gap-3 ${GeistPixelSquare.className}`}>
+        <div className={`flex flex-row items-center gap-3 p-1 ${GeistPixelSquare.className}`}>
           <ContactDialog />
           <span className="text-[10px] opacity-75 text-muted-foreground md:text-xs font-doto">OR</span>
           <CornerBrackets>
@@ -101,7 +101,7 @@ const Hero = ({ contributionData = [] }) => {
 
       <div className="space-y-8">
         <div>
-          <h5 className="mb-4 font-cera text-2xl font-medium md:text-3xl font-doto">
+          <h5 className="mb-4 text-2xl font-medium md:text-3xl font-doto">
             About Me
           </h5>
           <p className="text-xs md:text-base">
@@ -123,16 +123,18 @@ const Hero = ({ contributionData = [] }) => {
           <p className="mb-3 text-xs text-muted-foreground md:text-sm">
             My <span className="font-semibold text-foreground">social links</span> if you wish to connect with me
           </p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 p-1">
             {socialLinks.map(({ label, href, icon, external }) => (
               <SocialButton key={label} label={label} href={href} icon={icon} external={external} />
             ))}
           </div>
         </div>
 
-        
-          <GitHubContributionGraph data={contributionData} />
-       
+        <div className="w-[calc(100vw-2rem)] overflow-x-auto md:w-auto">
+          <div className="min-w-[700px]">
+            <GitHubContributionGraph data={contributionData} />
+          </div>
+        </div>
       </div>
     </div>
   );

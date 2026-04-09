@@ -10,7 +10,7 @@ export default async function About() {
   const contributionData = await fetchGitHubContributions();
 
   return (
-    <div className=" overflow-x-hidden">
+    <div className="overflow-x-hidden">
       <Layout>
         <Hero contributionData={contributionData} />
       </Layout>
