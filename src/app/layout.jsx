@@ -66,12 +66,14 @@ export const metadata = {
     description:
       "Hello there I am Shiva a full stack developer and I love to build products that make people's life easier.",
     images: ["https://shiva.codes/opengraph.png"],
-    creator: "@sh17va", 
+    creator: "@sh17va",
   },
   alternates: {
     canonical: "https://shiva.codes",
     types: {
-      "application/rss+xml": [{ url: "https://shiva.codes/rss.xml", title: "RSS Feed" }],
+      "application/rss+xml": [
+        { url: "https://shiva.codes/rss.xml", title: "RSS Feed" },
+      ],
     },
   },
 };
@@ -92,7 +94,8 @@ export default function RootLayout({ children }) {
     "@type": "Person",
     name: "Shiva Bhattacharjee",
     jobTitle: "Full Stack Developer",
-    description: "Full stack developer who loves to build products that make people's life easier",
+    description:
+      "Full stack developer who loves to build products that make people's life easier",
     url: "https://shiva.codes",
     image: "https://shiva.codes/opengraph.png",
   };
@@ -103,8 +106,15 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#0B0D0E" />
         <meta name="color-scheme" content="dark light" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap"
+          rel="stylesheet"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -118,10 +128,11 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           <div className="grid min-h-[100dvh] grid-rows-[1fr_auto] overflow-x-hidden">
-            <main className={`${GeistPixelSquare.className} px-6 md:px-0 pt-14 `}>
-              <OnekoCat/>
+            <main
+              className={`${GeistPixelSquare.className} px-6 pt-14 md:px-0`}
+            >
+              <OnekoCat />
               {children}
-
             </main>
             <Footer />
             <NavigationBar />

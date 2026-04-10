@@ -6,16 +6,14 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import MoonIcon from "./icons/moon";
 import SunIcon from "./icons/sun";
+import { playClickSound } from "@/lib/haptics";
 
 const Toggle = () => {
   const { theme, setTheme } = useTheme();
 
-  const switchTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-
   const toggleMode = () => {
-    switchTheme();
+    playClickSound();
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
