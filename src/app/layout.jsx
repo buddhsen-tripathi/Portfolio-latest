@@ -70,11 +70,6 @@ export const metadata = {
   },
   alternates: {
     canonical: "https://shiva.codes",
-    types: {
-      "application/rss+xml": [
-        { url: "https://shiva.codes/rss.xml", title: "RSS Feed" },
-      ],
-    },
   },
 };
 
