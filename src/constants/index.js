@@ -113,7 +113,7 @@ export const experiences = [
     year: "July 2025 - Present",
     company: "Bez",
     type: "Full-Time",
-    location: "Remote",
+    location: "New York, Remote",
     logo: "/Company/Astra.png",
     logoPadding: false,
     invertLogo: true,
