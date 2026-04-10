@@ -8,7 +8,6 @@ const Footer = () => {
   const [time, setTime] = useState(null);
   const [battery, setBattery] = useState(null);
   const [location, setLocation] = useState(null);
-
   useEffect(() => {
     const tick = () => setTime(new Date());
     tick();
@@ -30,9 +29,9 @@ const Footer = () => {
     fetch("/api/location")
       .then((res) => res.json())
       .then((data) => {
-        const city = data.city || "";
         const country = data.country || "";
-        setLocation(city ? `${city}, ${country}` : country);
+        const region = data.region || "";
+        setLocation(region ? `${region}, ${country}` : country);
       })
       .catch(() => setLocation(null));
   }, []);
