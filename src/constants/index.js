@@ -135,6 +135,17 @@ export const experiences = [
 
 export const projects = [
   {
+    title: "KeyZen",
+    category: "Side Project · Web App",
+    description:
+      "A typing speed test built around the Keychron keyboard aesthetic with audio feedback on every keystroke. Tracks WPM, accuracy, and stats with a clean, minimal UI.",
+    techstacks: ["Next.js", "TypeScript", "Motion", "Recharts", "shadcn/ui"],
+    status: "active",
+    link: "https://keyzen.theshiva.xyz/",
+    preview: "/projects/keyzen-light.png",
+    previewDark: "/projects/keyzen.png",
+  },
+  {
     title: "taptickit",
     category: "Open Source · npm",
     description:
