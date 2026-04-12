@@ -35,7 +35,7 @@ const socialLinks = [
   },
   {
     label: "Discord",
-    href: "https://discord.com/users/shivabhattacharjee",
+    href: "https://discordapp.com/users/503152077824851968",
     icon: <DiscordIcon className="h-3.5 w-3.5" />,
     external: true,
   },
