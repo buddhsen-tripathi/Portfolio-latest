@@ -31,7 +31,7 @@ const DEFAULT_MONTH_LABELS = [
 const DEFAULT_LABELS = {
   months: DEFAULT_MONTH_LABELS,
   weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-  totalCount: "Total {{count}} contributions in lifetime",
+  totalCount: "Total {{count}} contributions",
   legend: {
     less: "Less",
     more: "More",

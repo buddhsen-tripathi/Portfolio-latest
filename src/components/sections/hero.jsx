@@ -127,7 +127,9 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
               onClick={() => {
                 navigator.clipboard.writeText("npx shivadev");
                 toast.success("Copied to clipboard", {
-                  description: "npx shivadev",
+                  description: "You can now paste it in your terminal to see the cli version of my portfolio",
+                  icon: <ClipboardIcon className="h-4 w-4" />,
+                  classNames: { description: "font-space-mono" },
                 });
               }}
             >
@@ -191,13 +193,11 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
           </div>
         </div>
 
-        <div className="w-[calc(95vw-2rem)] overflow-x-auto md:w-auto">
-          <div className="min-w-[700px]">
-            <GitHubContributionGraph
-              data={contributionData}
-              lifetimeTotal={lifetimeTotal}
-            />
-          </div>
+        <div>
+          <GitHubContributionGraph
+            data={contributionData}
+            lifetimeTotal={lifetimeTotal}
+          />
         </div>
 
         <div>

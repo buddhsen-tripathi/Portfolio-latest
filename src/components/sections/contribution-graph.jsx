@@ -32,21 +32,25 @@ const GitHubContributionGraph = ({ data = [], lifetimeTotal }) => {
   return (
     <div className="relative">
       <ContributionGraph data={data} fontSize={11} blockSize={10} blockMargin={3} totalCount={lifetimeTotal}>
-        <ContributionGraphCalendar>
-          {({ activity, dayIndex, weekIndex }) => (
-            <g
-              className="cursor-pointer"
-              onMouseEnter={(e) => handleMouseEnter(e, activity)}
-              onMouseLeave={handleMouseLeave}
-            >
-              <ContributionGraphBlock
-                activity={activity}
-                dayIndex={dayIndex}
-                weekIndex={weekIndex}
-              />
-            </g>
-          )}
-        </ContributionGraphCalendar>
+        <div className="w-[calc(95vw-2rem)] overflow-x-auto md:w-auto md:overflow-hidden">
+          <div className="min-w-[700px]">
+            <ContributionGraphCalendar>
+              {({ activity, dayIndex, weekIndex }) => (
+                <g
+                  className="cursor-pointer"
+                  onMouseEnter={(e) => handleMouseEnter(e, activity)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <ContributionGraphBlock
+                    activity={activity}
+                    dayIndex={dayIndex}
+                    weekIndex={weekIndex}
+                  />
+                </g>
+              )}
+            </ContributionGraphCalendar>
+          </div>
+        </div>
         <ContributionGraphFooter>
           <ContributionGraphTotalCount className="text-[10px] text-muted-foreground md:text-xs" />
           <ContributionGraphLegend className="text-[10px] text-muted-foreground md:text-xs" />
