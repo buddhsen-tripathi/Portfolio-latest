@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { motion } from "motion/react";
 import XTwitterIcon from "@/components/icons/x-twitter";
 import GithubIcon from "@/components/icons/github";
 import LinkedinIcon from "@/components/icons/linkedin";
@@ -13,6 +14,12 @@ import GitHubContributionGraph from "./contribution-graph";
 import ClipboardIcon from "@/components/icons/clipboard";
 import { CornerBrackets } from "@/components/ui/corner-brackets";
 import { notableAchievements } from "@/constants";
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.4, delay, ease: [0.16, 1, 0.3, 1] },
+});
 
 const socialLinks = [
   {
@@ -101,7 +108,7 @@ const WaveEmoji = () => {
 const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
   return (
     <div className="mx-auto flex flex-col gap-10 md:max-w-4xl">
-      <div className="flex flex-col gap-6">
+      <motion.div className="flex flex-col gap-6" {...fadeUp(0)}>
         <div className={GeistPixelSquare.className}>
           <p className="mb-3 font-doto text-xs text-muted-foreground md:text-sm">
             Hola I&apos;m <WaveEmoji />
@@ -118,8 +125,9 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
           </p>
         </div>
 
-        <div
+        <motion.div
           className={`flex flex-row items-end gap-4 p-1 ${GeistPixelSquare.className}`}
+          {...fadeUp(0.08)}
         >
           <CornerBrackets>
             <Button
@@ -151,11 +159,11 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
               try this in <br /> your terminal
             </span>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       <div className="space-y-8">
-        <div>
+        <motion.div {...fadeUp(0.15)}>
           <h5 className="mb-4 font-doto text-2xl font-medium md:text-3xl">
             About Me
           </h5>
@@ -172,9 +180,9 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
             messy, behind-the-scenes infrastructure work just as much as
             shipping the final product.
           </p>
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div {...fadeUp(0.25)}>
           <p className="mb-3 text-xs text-muted-foreground md:text-sm">
             My{" "}
             <span className="font-semibold text-foreground">social links</span>{" "}
@@ -191,16 +199,16 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
               />
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div {...fadeUp(0.35)}>
           <GitHubContributionGraph
             data={contributionData}
             lifetimeTotal={lifetimeTotal}
           />
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div {...fadeUp(0.45)}>
           <h5 className="mb-4 font-doto text-2xl font-medium md:text-3xl">
             Notable achievements
           </h5>
@@ -247,7 +255,7 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

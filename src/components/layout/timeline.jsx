@@ -1,9 +1,16 @@
+"use client";
 import React from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 
-const Timeline = ({ role, company, year, type, location, logo, logoPadding, invertLogo, responsibility, techstacks }) => {
+const Timeline = ({ role, company, year, type, location, logo, logoPadding, invertLogo, responsibility, techstacks, index = 0 }) => {
   return (
-    <ol className="relative border-s border-black/[0.1] dark:border-white/[0.1]">
+    <motion.ol
+      className="relative border-s border-black/[0.1] dark:border-white/[0.1]"
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+    >
       <li className="ms-4 p-3 md:ms-6 md:p-5">
         <span className="absolute mt-1.5 -start-[5px] rounded-full w-2.5 h-2.5 bg-black/20 dark:bg-white/30" />
 
@@ -71,7 +78,7 @@ const Timeline = ({ role, company, year, type, location, logo, logoPadding, inve
           </div>
         </div>
       </li>
-    </ol>
+    </motion.ol>
   );
 };
 

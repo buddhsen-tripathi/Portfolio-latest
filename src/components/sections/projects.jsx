@@ -33,18 +33,22 @@ const Projects = ({
   preview,
   previewDark,
   illustration,
+  index = 0,
 }) => {
   const [isHovered, setIsHovered] = useState(false)
   const Illustration = illustration ? projectIllustrations[illustration] : null
 
   return (
-    <a
+    <motion.a
       href={link}
       target="_blank"
       rel="noopener noreferrer"
       className="group relative block min-w-0 border border-black/[0.06] bg-black/[0.02] transition-colors hover:bg-black/[0.04] dark:border-white/[0.06] dark:bg-white/[0.03] dark:hover:bg-white/[0.05]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
     >
       <AnimatePresence>
         {isHovered && (
@@ -131,7 +135,7 @@ const Projects = ({
           ))}
         </div>
       </div>
-    </a>
+    </motion.a>
   );
 };
 

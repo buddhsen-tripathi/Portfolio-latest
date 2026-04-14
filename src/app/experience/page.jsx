@@ -17,7 +17,7 @@ const Experience = () => {
     >
       <div>
         {[...experiences].reverse().map((experience, index) => (
-          <Timeline {...experience} key={index} />
+          <Timeline {...experience} key={index} index={index} />
         ))}
       </div>
     </Layout>
