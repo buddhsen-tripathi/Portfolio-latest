@@ -13,12 +13,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "border border-black/[0.1] bg-black/[0.04] text-foreground hover:bg-black/[0.08] dark:border-white/[0.1] dark:bg-white/[0.06] dark:hover:bg-white/[0.12]",
+          "border border-black/[0.1] bg-black/[0.04] text-foreground hover:bg-black/[0.08] dark:border-white/[0.1] dark:bg-white/[0.06] dark:hover:bg-white/[0.12] button-highlighted-shadow",
         noShadow:
           "border border-black/[0.1] bg-black/[0.04] text-foreground dark:border-white/[0.1] dark:bg-white/[0.06]",
         link: "underline-offset-4 hover:underline text-foreground",
         neutral:
-          "bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90",
+          "bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 button-highlighted-shadow",
         outline:
           "border border-black/[0.1] bg-transparent text-foreground hover:bg-black/[0.04] dark:border-white/[0.1] dark:hover:bg-white/[0.06]",
         ghost:
