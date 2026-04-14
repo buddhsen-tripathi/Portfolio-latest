@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import Link from "next/link";
+import GithubIcon from "../icons/github";
 
 const accentColor = {
   "1st Place":     "text-yellow-500 dark:text-yellow-400",
@@ -67,9 +68,9 @@ const HackathonEntry = ({ title, event, year, placement, college, description, t
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-2 inline-block text-xs text-foreground/60 underline underline-offset-[3px] decoration-foreground/20 transition-colors hover:text-foreground hover:decoration-foreground/50 md:text-sm"
+          className="mt-4 flex gap-2 items-center inline-block text-xs text-foreground/60 underline underline-offset-[3px] decoration-foreground/20 transition-colors hover:text-foreground hover:decoration-foreground/50 md:text-sm"
         >
-          {title} on GitHub
+        <GithubIcon className={"w-4 h-4"} /> GitHub
         </Link>
       )}
     </motion.article>
