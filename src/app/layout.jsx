@@ -75,12 +75,19 @@ export const metadata = {
 };
 
 import { GeistPixelSquare } from "geist/font/pixel";
-import { Space_Mono } from "next/font/google";
+import { Space_Mono, Press_Start_2P } from "next/font/google";
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-space-mono",
+  display: "swap",
+});
+
+const pressStart = Press_Start_2P({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-press-start",
   display: "swap",
 });
 
@@ -97,7 +104,7 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" suppressHydrationWarning className={spaceMono.variable}>
+    <html lang="en" suppressHydrationWarning className={`${spaceMono.variable} ${pressStart.variable}`}>
       <head>
         <meta name="theme-color" content="#0B0D0E" />
         <meta name="color-scheme" content="dark light" />

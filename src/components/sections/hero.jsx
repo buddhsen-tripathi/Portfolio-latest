@@ -214,7 +214,25 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
                   {title}.{" "}
                 </span>
                 <span className="font-space-mono text-sm leading-relaxed text-muted-foreground md:text-base">
-                  {body}
+                  {Array.isArray(body)
+                    ? body.map((seg, i) =>
+                        seg.href ? (
+                          <Link
+                            key={i}
+                            href={seg.href}
+                            className="font-semibold text-foreground underline underline-offset-2 transition-colors hover:text-foreground/70"
+                          >
+                            {seg.text}
+                          </Link>
+                        ) : seg.bold ? (
+                          <strong key={i} className="font-semibold text-foreground">
+                            {seg.text}
+                          </strong>
+                        ) : (
+                          <span key={i}>{seg.text}</span>
+                        )
+                      )
+                    : body}
                 </span>
                 {link && (
                   <Link

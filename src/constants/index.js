@@ -12,35 +12,73 @@ export const navLinks = [
     name: "Experience",
   },
   {
-    path: "/research",
-    name: "Research",
+    path: "/hackathons",
+    name: "Hacks",
   },
 ];
 
 export const notableAchievements = [
   {
     title: "Smart India Hackathon",
-    body: "Made it to SIH 2023 in my very first semester of college. Didn't really know what I was doing but figured it out.",
+    body: [
+      { text: "Made it to " },
+      { text: "SIH 2023", bold: true },
+      { text: " in my very first semester of college. Didn't really know what I was doing but figured it out." },
+    ],
   },
   {
     title: "Hackathons",
-    body: "Won 5 hackathons, mostly building AI stuff. WasteEasy was probably the one I'm proudest of, it rewards people for dumping waste responsibly. Took home Rs. 30,000 from ADTU and got called out as a unique tech startup at an IIM Shillong entrepreneurship event.",
+    body: [
+      { text: "Won " },
+      { text: "5 hackathons", bold: true, href: "/hackathons" },
+      { text: ", mostly building AI stuff. " },
+      { text: "WasteEasy", bold: true },
+      { text: " was probably the one I'm proudest of, it rewards people for dumping waste responsibly. Took home " },
+      { text: "Rs. 30,000", bold: true },
+      { text: " from ADTU and got called out as a unique tech startup at an " },
+      { text: "IIM Shillong", bold: true },
+      { text: " entrepreneurship event." },
+    ],
     link: "https://github.com/ShivaBhattacharjee/WasteEasy",
     linkLabel: "WasteEasy on GitHub",
   },
   {
     title: "Rise In bounty",
-    body: "Got a bounty from Rise In for a project that lets people lend money on Ethereum and build an actual credit score on-chain. No banks, just smart contracts.",
+    body: [
+      { text: "Got a bounty from " },
+      { text: "Rise In", bold: true },
+      { text: " for a project that lets people lend money on " },
+      { text: "Ethereum", bold: true },
+      { text: " and build an actual " },
+      { text: "credit score on-chain", bold: true },
+      { text: ". No banks, just smart contracts." },
+    ],
     link: "https://github.com/ShivaBhattacharjee/lending-blockchain",
     linkLabel: "lending-blockchain on GitHub",
   },
   {
     title: "In the news",
-    body: "Got featured in a national newspaper for building a fine-tuned LLM on the Assamese language, one of the first of its kind for a low-resource Indian language.",
+    body: [
+      { text: "Got featured in a " },
+      { text: "national newspaper", bold: true },
+      { text: " for building a " },
+      { text: "fine-tuned LLM on the Assamese language", bold: true },
+      { text: ", one of the first of its kind for a low-resource Indian language." },
+    ],
   },
   {
     title: "Side project at scale",
-    body: "Built AnimeTrix, an anime streaming site, hit around 15,000 users and was handling 100 concurrent viewers at peak using web scraping and some creative infra decisions. Had to take it down after a DMCA. The repo still has ~190 stars.",
+    body: [
+      { text: "Built " },
+      { text: "AnimeTrix", bold: true },
+      { text: ", an anime streaming site, hit around " },
+      { text: "15,000 users", bold: true },
+      { text: " and was handling " },
+      { text: "100 concurrent viewers", bold: true },
+      { text: " at peak using web scraping and some creative infra decisions. Had to take it down after a DMCA. The repo still has " },
+      { text: "~190 stars", bold: true },
+      { text: "." },
+    ],
     link: "https://github.com/ShivaBhattacharjee/AnimeTrix-next",
     linkLabel: "AnimeTrix on GitHub",
   },
@@ -164,6 +202,81 @@ export const projects = [
     link: "https://sonification.shiva.codes",
     preview: "/sonification-light.png",
     previewDark: "/sonification.png",
+  },
+];
+
+export const hackathons = [
+  {
+    title: "WasteEasy",
+    event: "Envision Hackathon a",
+    year: "2023",
+    placement: "1st Place",
+    college: "Assam Down Town University",
+    description:
+      "An app that rewards people for disposing waste responsibly. Recognised as a unique tech startup at an IIM Shillong entrepreneurship event.",
+    techstacks: ["React Native", "Node.js", "MongoDB", "Google Maps API"],
+    link: "https://github.com/ShivaBhattacharjee/WasteEasy",
+  },
+  {
+    title: "Smart Parking for Guwahati",
+    event: "Technophilia 2023",
+    year: "2023",
+    placement: "1st Place",
+    college: "Assam Royal Global University",
+    description:
+      "Built a Google Maps-style smart parking platform for Guwahati where users can discover nearby parking spots, calculate the shortest route to available locations, and make faster parking decisions in busy areas. Added community-driven features like ratings, written reviews, on-ground image uploads, and complaint reporting to flag incorrect info or local issues. The crowdsourced data model kept listings fresh and practical, helping the project win 1st prize at Technophilia.",
+    techstacks: ["React", "Node.js", "MongoDB", "Google Maps API"],
+  },
+  {
+    title: "MediTrack Attendance",
+    event: "Hack GCU",
+    year: "2024",
+    placement: "2nd Place",
+    college: "Girijananda Chowdhury University",
+    description:
+      "Built a medical attendance system in a 20-hour sprint to digitize attendance for healthcare staff and trainees. Implemented rapid check-in flows, role-based records, and basic reporting to reduce manual entry and improve shift-level visibility. The speed of execution and practical utility secured 2nd prize at Hack GCU.",
+    techstacks: ["React", "Node.js", "Express", "MongoDB"],
+  },
+  {
+    title: "Campus Safety App",
+    event: "Code War 5.0 Hackathon",
+    year: "2024",
+    placement: "2nd Place",
+    college: "Assam Engineering College",
+    description:
+      "Secured 2nd position at Code War 5.0 by building a campus safety app that enabled incident reporting, location-aware alerts, and faster coordination during emergencies. Built with Next.js 14, Google Maps API, serverless functions, and Socket.IO for real-time updates and communication.",
+    techstacks: ["Next.js 14", "Google Maps API", "Serverless Functions", "Socket.IO"],
+  },
+  {
+    title: "Real-time Space Data Terminal",
+    event: "Frint Hackathon",
+    year: "2025",
+    placement: "3rd Place",
+    college: "Assam Down Town University",
+    description:
+      "Won 3rd position by building a live space intelligence dashboard that combined Mars weather updates, an ISS live tracker, near-Earth asteroid monitoring, and NASA's Astronomy Picture of the Day in one terminal-style interface. Built with Next.js, Three.js, and NASA Open APIs with real-time data refresh and interactive visual rendering.",
+    techstacks: ["Next.js", "Three.js", "NASA Open APIs"],
+  },
+  {
+    title: "Smart India Hackathon",
+    event: "SIH 2023",
+    year: "2023",
+    placement: "Qualifier",
+    college: " Visvesvaraya Technological University ",
+    description:
+      "Qualified for SIH 2023 in my very first semester of college. Figured it out on the fly and made it through the national rounds.",
+    techstacks: ["React", "Node.js", "Express", "MongoDB"],
+  },
+  {
+    title: "Lending on Blockchain",
+    event: "Rise In Bounty",
+    year: "2023",
+    placement: "Bounty Winner",
+    college: "Assam Royal Global University",
+    description:
+      "A decentralised lending protocol that lets people lend money on Ethereum and build an actual credit score on-chain — no banks, just smart contracts.",
+    techstacks: ["Solidity", "Ethereum", "React", "Hardhat", "Web3.js"],
+    link: "https://github.com/ShivaBhattacharjee/lending-blockchain",
   },
 ];
 
