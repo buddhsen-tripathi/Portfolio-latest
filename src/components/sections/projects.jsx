@@ -77,10 +77,10 @@ const Projects = ({
       {(preview || Illustration) && (
         <div>
           <div
-            className={`border-b border-black/[0.06] dark:border-white/[0.06] ${Illustration ? "overflow-hidden bg-zinc-100 dark:bg-zinc-950" : "relative aspect-[8/5] w-full overflow-hidden bg-white dark:bg-black"}`}
+            className={`border-b border-black/[0.06] dark:border-white/[0.06] ${Illustration ? "relative aspect-[8/5] w-full overflow-hidden bg-zinc-100 dark:bg-zinc-950" : "relative aspect-[8/5] w-full overflow-hidden bg-white dark:bg-black"}`}
           >
             {Illustration ? (
-              <div className={`transition-[filter] duration-500 ${isHovered ? "grayscale-0" : "grayscale"}`}>
+              <div className={`absolute inset-0 flex items-center justify-center transition-[filter] duration-500 ${isHovered ? "grayscale-0" : "grayscale"}`}>
                 <Illustration isCardHovered={isHovered} />
               </div>
             ) : previewDark ? (
