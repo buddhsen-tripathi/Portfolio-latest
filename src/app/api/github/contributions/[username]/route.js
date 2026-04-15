@@ -18,7 +18,7 @@ function mapContributionLevel(level) {
 }
 
 export async function GET(request, context) {
-  const username = context.params?.username
+  const username = (await context.params)?.username
 
   if (!username) {
     return NextResponse.json({ error: "Username parameter is required" }, { status: 400 })

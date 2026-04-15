@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 import LocationIcon from "@/components/icons/location";
 import BoltIcon from "@/components/icons/bolt";
+import CloudSunIcon from "@/components/icons/cloud-sun";
 
 const Footer = () => {
   const [time, setTime] = useState(null);
   const [battery, setBattery] = useState(null);
   const [location, setLocation] = useState(null);
+  const [weather, setWeather] = useState(null);
   useEffect(() => {
     const tick = () => setTime(new Date());
     tick();
@@ -29,9 +31,16 @@ const Footer = () => {
     fetch("/api/location")
       .then((res) => res.json())
       .then((data) => {
+        const city = data.city || "";
         const country = data.country || "";
-        const region = data.region || "";
-        setLocation(region ? `${region}, ${country}` : country);
+        if (city && country) {
+          setLocation(`${city}, ${country}`);
+        } else {
+          setLocation(city || country || null);
+        }
+        if (data.weather) {
+          setWeather(`${data.weather.temperature}${data.weather.unit}`);
+        }
       })
       .catch(() => setLocation(null));
   }, []);
@@ -66,6 +75,13 @@ const Footer = () => {
             <span className="flex items-center gap-1">
               <LocationIcon className="h-3 w-3" />
               {location}
+              {weather && (
+                <>
+                  <span>&middot;</span>
+                  <CloudSunIcon className="h-3 w-3" />
+                  {weather}
+                </>
+              )}
             </span>
           )}
           {battery !== null && (
