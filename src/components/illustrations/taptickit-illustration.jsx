@@ -91,25 +91,30 @@ export function TaptickitIllustration({ isCardHovered = false }) {
   // Screen content
   const contentL = bezel + 4
   const contentR = pw - bezel - 4
-  const contentW = contentR - contentL
 
-  const line1 = isoRect(contentL, 22, contentW * 0.65, 1.5)
-  const line2 = isoRect(contentL, 27, contentW * 0.45, 1.2)
-  const line3 = isoRect(contentL, 31, contentW * 0.55, 1.2)
+  // ── Haptic Engine Icon (screen center) ──
+  const hCx = pw / 2
+  const hCy = ph / 2 + 2
+  const hRectW = 14
+  const hRectH = 10
+  const hSpread = 22
 
-  const card1 = isoRoundRect(contentL, 38, contentW, 18, 3)
-  const card1Line1 = isoRect(contentL + 4, 43, 22, 1.2)
-  const card1Line2 = isoRect(contentL + 4, 47, 15, 1.2)
-  const card1Btn = isoRoundRect(contentR - 15, 43, 12, 5, 2.5)
+  const hapticRect = isoRoundRect(hCx - hRectW / 2, hCy - hRectH / 2, hRectW, hRectH, 2.5)
+  const hapticInner = isoRoundRect(hCx - hRectW / 2 + 2, hCy - hRectH / 2 + 2, hRectW - 4, hRectH - 4, 1.5)
 
-  const card2 = isoRoundRect(contentL, 60, contentW, 18, 3)
-  const card2Line1 = isoRect(contentL + 4, 65, 20, 1.2)
-  const card2Line2 = isoRect(contentL + 4, 69, 26, 1.2)
-  const card2Btn = isoRoundRect(contentR - 15, 65, 12, 5, 2.5)
+  const hDots = [
+    { x: hCx, y: hCy - hSpread, label: "top" },
+    { x: hCx, y: hCy + hSpread, label: "bottom" },
+    { x: hCx - hSpread * 0.75, y: hCy, label: "left" },
+    { x: hCx + hSpread * 0.75, y: hCy, label: "right" },
+  ]
 
-  const line4 = isoRect(contentL, 85, contentW * 0.7, 1.2)
-  const line5 = isoRect(contentL, 90, contentW * 0.5, 1.2)
-  const line6 = isoRect(contentL, 95, contentW * 0.6, 1.2)
+  const hCenter = { cx: isoX(hCx, hCy), cy: isoY(hCx, hCy) }
+  const hDotPositions = hDots.map(d => ({
+    cx: isoX(d.x, d.y),
+    cy: isoY(d.x, d.y),
+    label: d.label,
+  }))
 
   const homeBar = isoRoundRect((pw - 20) / 2, ph - bezel - 6, 20, 2, 1)
 
@@ -380,29 +385,94 @@ export function TaptickitIllustration({ isCardHovered = false }) {
           <path d={isoRect(contentL, bezel + 3, 12, 1.2)} className="fill-zinc-300/60 dark:fill-zinc-600/40" />
           <path d={isoRect(contentR - 14, bezel + 3, 14, 1.2)} className="fill-zinc-300/60 dark:fill-zinc-600/40" />
 
-          {/* Content heading */}
-          <path d={line1} className="fill-zinc-300 dark:fill-zinc-700" />
-          <path d={line2} className="fill-zinc-300/60 dark:fill-zinc-700/45" />
-          <path d={line3} className="fill-zinc-300/40 dark:fill-zinc-700/30" />
+          {/* ── Haptic Engine Icon ── */}
+          {/* Static base wires (center to each dot) */}
+          {hDotPositions.map((dot) => (
+            <line
+              key={`wire-base-${dot.label}`}
+              x1={hCenter.cx}
+              y1={hCenter.cy}
+              x2={dot.cx}
+              y2={dot.cy}
+              className="stroke-zinc-300/40 dark:stroke-zinc-600/30"
+              strokeWidth={0.5}
+            />
+          ))}
 
-          {/* Card 1 */}
-          <path d={card1} className="fill-zinc-100 dark:fill-zinc-800/45" />
-          <path d={card1} fill="none" className="stroke-zinc-200/50 dark:stroke-zinc-700/25" strokeWidth={0.4} />
-          <path d={card1Line1} className="fill-zinc-400/35 dark:fill-zinc-600/35" />
-          <path d={card1Line2} className="fill-zinc-400/20 dark:fill-zinc-600/20" />
-          <path d={card1Btn} className="fill-zinc-200/80 dark:fill-zinc-700/40" />
+          {/* Animated pulse traveling along wires (always running) */}
+          {hDotPositions.map((dot, i) => {
+            const lineLen = Math.hypot(dot.cx - hCenter.cx, dot.cy - hCenter.cy)
+            return (
+              <motion.line
+                key={`wire-pulse-${dot.label}`}
+                x1={hCenter.cx}
+                y1={hCenter.cy}
+                x2={dot.cx}
+                y2={dot.cy}
+                fill="none"
+                className="stroke-zinc-400 dark:stroke-zinc-400"
+                strokeWidth={1}
+                strokeLinecap="round"
+                strokeDasharray={`4 ${lineLen}`}
+                initial={{ strokeDashoffset: lineLen, opacity: 0.7 }}
+                animate={{ strokeDashoffset: [lineLen, -lineLen], opacity: 0.7 }}
+                transition={
+                  prefersReducedMotion
+                    ? { duration: 0.15 }
+                    : {
+                        duration: 1.0,
+                        delay: i * 0.15,
+                        repeat: Infinity,
+                        repeatDelay: 0.4,
+                        ease: "linear",
+                      }
+                }
+              />
+            )
+          })}
 
-          {/* Card 2 */}
-          <path d={card2} className="fill-zinc-100 dark:fill-zinc-800/45" />
-          <path d={card2} fill="none" className="stroke-zinc-200/50 dark:stroke-zinc-700/25" strokeWidth={0.4} />
-          <path d={card2Line1} className="fill-zinc-400/35 dark:fill-zinc-600/35" />
-          <path d={card2Line2} className="fill-zinc-400/20 dark:fill-zinc-600/20" />
-          <path d={card2Btn} className="fill-zinc-200/80 dark:fill-zinc-700/40" />
+          {/* Connector dots at endpoints (always pulsing) */}
+          {hDotPositions.map((dot, i) => (
+            <motion.circle
+              key={`dot-${dot.label}`}
+              cx={dot.cx}
+              cy={dot.cy}
+              r={2}
+              className="fill-zinc-400 dark:fill-zinc-500"
+              initial={{ scale: 1, opacity: 0.6 }}
+              animate={{ scale: [1, 1.6, 1], opacity: [0.4, 1, 0.4] }}
+              transition={
+                prefersReducedMotion
+                  ? { duration: 0.15 }
+                  : {
+                      duration: 0.8,
+                      delay: 0.2 + i * 0.12,
+                      repeat: Infinity,
+                      repeatDelay: 0.8,
+                      ease: "easeInOut",
+                    }
+              }
+              style={{ transformOrigin: `${dot.cx}px ${dot.cy}px` }}
+            />
+          ))}
 
-          {/* Extra content lines */}
-          <path d={line4} className="fill-zinc-300/50 dark:fill-zinc-700/35" />
-          <path d={line5} className="fill-zinc-300/35 dark:fill-zinc-700/25" />
-          <path d={line6} className="fill-zinc-300/25 dark:fill-zinc-700/18" />
+          {/* Central haptic engine rectangle (shakes on hover) */}
+          <motion.g
+            initial={false}
+            animate={
+              isCardHovered && !prefersReducedMotion
+                ? { x: [0, -1.5, 1.5, -1, 1, -0.5, 0.5, 0], y: [0, 0.3, -0.3, 0.2, -0.2, 0] }
+                : { x: 0, y: 0 }
+            }
+            transition={
+              isCardHovered && !prefersReducedMotion
+                ? { duration: 0.3, repeat: Infinity, repeatDelay: 1.1, ease: "easeInOut" }
+                : { duration: 0.2 }
+            }
+          >
+            <path d={hapticRect} className="fill-zinc-200/80 dark:fill-zinc-700/60 stroke-zinc-400/60 dark:stroke-zinc-500/35" strokeWidth={0.6} />
+            <path d={hapticInner} className="fill-zinc-300/70 dark:fill-zinc-600/45" />
+          </motion.g>
 
           {/* Home indicator */}
           <path d={homeBar} className="fill-zinc-300/80 dark:fill-zinc-600/60" />
