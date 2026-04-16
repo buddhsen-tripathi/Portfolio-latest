@@ -33,15 +33,15 @@ const Timeline = ({ role, company, year, type, location, logo, logoPadding, inve
             </div>
 
             <div className="min-w-0">
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <span className="truncate text-xs font-semibold md:text-sm">{company}</span>
                 {type && (
-                  <span className="shrink-0 rounded-full border border-black/[0.08] bg-black/[0.04] px-1.5 py-px text-[8px] font-medium text-muted-foreground dark:border-white/[0.08] dark:bg-white/[0.06] md:text-[9px]">
+                  <span className="shrink-0 rounded-full  px-1.5 py-px text-[8px] bg-black/[0.08] font-medium text-muted-foreground dark:bg-white/[0.08] md:text-[9px]">
                     {type}
                   </span>
                 )}
               </div>
-              <p className="truncate text-[10px] text-muted-foreground md:text-xs">{role}</p>
+              <p className="truncate text-[10px] text-muted-foreground md:text-xs  mt-1">{role}</p>
             </div>
           </div>
 

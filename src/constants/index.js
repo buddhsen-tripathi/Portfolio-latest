@@ -115,7 +115,7 @@ export const experiences = [
     year: "Oct 2024 - Jan 2025",
     company: "TTIPL",
     type: "Full-Time",
-    location: "India, On-Site",
+    location: "Hyderabad, Hybrid",
     logo: "/Company/ttipl.png",
     responsibility:
       "Built internal ERP modules for billing, vendor, and project tracking used by construction operations. Developed semantic project document search using RAG pipelines with OpenAI embeddings and vector databases for construction drawings, BOQs, and reports. Optimized API performance and database queries improving internal tool response times and reliability.",
@@ -131,11 +131,11 @@ export const experiences = [
     ],
   },
   {
-    role: "Member of Technical Staff",
+    role: "Founding Engineer",
     year: "Jan 2025 - July 2025",
     company: "Navdyut AI",
     type: "Full-Time",
-    location: "India, On-Site",
+    location: "Guwahati, On-Site",
     logo: "/Company/Navdyut.png",
     responsibility:
       "Built an Assamese chatbot on a 22B Mistral model with RAG pipelines for translation and government applications. Scaled the system to 500+ users and contributed to deployments for public sector use. Project work was featured in regional newspapers.",
@@ -151,7 +151,7 @@ export const experiences = [
     ],
   },
   {
-    role: "Applied AI & Full Stack Engineer",
+    role: "Applied AI Engineer",
     year: "July 2025 - Present",
     company: "Bez",
     type: "Full-Time",
