@@ -10,8 +10,9 @@ const corners = [
   { position: "-bottom-[3px] -right-[3px]", border: "border-b border-r" },
 ]
 
-export const CornerBrackets = forwardRef(function CornerBrackets({ children, className = "", ...props }, ref) {
+export const CornerBrackets = forwardRef(function CornerBrackets({ children, className = "", alwaysShow = false, ...props }, ref) {
   const [isHovered, setIsHovered] = useState(false)
+  const show = alwaysShow || isHovered
 
   return (
     <div
@@ -22,7 +23,7 @@ export const CornerBrackets = forwardRef(function CornerBrackets({ children, cla
       {...props}
     >
       <AnimatePresence>
-        {isHovered && (
+        {show && (
           <>
             <motion.span
               className="pointer-events-none absolute -inset-[3px] border border-dashed border-black/50 dark:border-white/50"

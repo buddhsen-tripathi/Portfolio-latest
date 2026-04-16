@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import HouseIcon from "@/components/icons/house";
+import { CornerBrackets } from "@/components/ui/corner-brackets";
+import { Button } from "@/components/ui/button";
 
 const AsciiCosmos = dynamic(() => import("@/components/AsciiCosmos"), {
   ssr: false,
@@ -31,13 +33,14 @@ export default function NotFound() {
           </p>
         </div>
 
-        <Link
-          href="/"
-          className="mt-2 inline-flex items-center gap-2 rounded-md border border-foreground/20 bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-foreground/80"
-        >
-          <HouseIcon className="size-4" />
-          Beam me home
-        </Link>
+        <CornerBrackets className="mt-2" alwaysShow>
+          <Button asChild>
+            <Link href="/" className="flex gap-3 items-center">
+              <HouseIcon className="size-4" />
+              Beam me home
+            </Link>
+          </Button>
+        </CornerBrackets>
 
         <p className="mt-4 max-w-xs text-xs text-muted-foreground/60">
           Fun fact: there are more stars in the universe than grains of sand on
