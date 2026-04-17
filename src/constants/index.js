@@ -8,12 +8,12 @@ export const navLinks = [
     name: "Projects",
   },
   {
-    path: "/experience",
-    name: "Experience",
-  },
-  {
     path: "/hackathons",
     name: "Hacks",
+  },
+  {
+    path: "/experience",
+    name: "Experience",
   },
 ];
 
