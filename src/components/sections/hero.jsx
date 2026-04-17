@@ -111,7 +111,7 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
       <motion.div className="flex flex-col gap-6" {...fadeUp(0)}>
         <div className={GeistPixelSquare.className}>
           <p className="mb-3 font-doto text-xs text-muted-foreground md:text-sm">
-            Hola I&apos;m <WaveEmoji />
+            Hello World I&apos;m <WaveEmoji />
           </p>
 
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -168,9 +168,10 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
             About Me
           </h5>
           <p className="text-xs font-space-mono md:text-base md:leading-relaxed text-muted-foreground">
-            Hi! I&apos;m Shiva Bhattacharjee an <strong className="font-semibold text-foreground">Applied AI Engineer</strong>. Most of my work revolves around <strong className="font-semibold text-foreground">LLMs, agentic systems</strong>, and building developer tools on top of them.{" "}
-            I&apos;ve shipped production systems with <strong className="font-semibold text-foreground">RAG pipelines</strong>, <strong className="font-semibold text-foreground">vector databases</strong>, and <strong className="font-semibold text-foreground">multimodal search</strong>  converting text and images into <strong className="font-semibold text-foreground">embeddings</strong> and ranking results via <strong className="font-semibold text-foreground">cosine similarity</strong>.<br/>
-            I&apos;ve also worked on <strong className="font-semibold text-foreground">multi-model pipelines</strong> with <strong className="font-semibold text-foreground">memory-augmented context</strong>, <strong className="font-semibold text-foreground">distributed task queues</strong>, and fine-tuning <strong className="font-semibold text-foreground">LLMs on low-resource languages</strong>. I&apos;ve won <strong className="font-semibold text-foreground">5 hackathons</strong> and was a <strong className="font-semibold text-foreground">Smart India Hackathon finalist</strong> in my first semester. I enjoy the messy infrastructure work just as much as shipping the final product.
+            I&apos;m Shiva, an <strong className="font-semibold text-foreground">Applied AI Engineer</strong>. Got into coding in 9th grade, spent a few years doing freelance work with PHP and jQuery before landing on React. The project that taught me the most was <strong className="font-semibold text-foreground"><a href="https://github.com/shivabhattacharjee/animetrix-next" target="_blank" className="underline">Animetrix</a></strong>, an anime streaming site I built in college that hit <strong className="font-semibold text-foreground">15k users and 200 GitHub stars </strong>. It was technically piracy (I was naive), broke constantly under traffic, which taught me about scalability. I rewrote the infra from scratch and got it to handle <strong className="font-semibold text-foreground">20k users</strong>, picking up <strong className="font-semibold text-foreground">Redis, Docker, horizontal scaling, and YAML</strong> along the way. Eventually got DMCA&apos;d. Worth it.
+          </p>
+          <p className="mt-4 text-xs font-space-mono md:text-base md:leading-relaxed text-muted-foreground">
+            Won <strong className="font-semibold text-foreground">5 hackathons</strong>, including qualifying for <strong className="font-semibold text-foreground">Smart India Hackathon 2023</strong> in my first semester, first from my college with roughly a ~1% selection rate. Since then I&apos;ve shipped production AI systems at a few early-stage startups. One of them I joined as a founding engineer, where I got deep into <strong className="font-semibold text-foreground">fine-tuning LLMs on low-resource Indian languages</strong> using <strong className="font-semibold text-foreground">Unsloth</strong>, containerizing models with <strong className="font-semibold text-foreground">Docker</strong>, self-hosting on servers, and exposing them as public APIs. Right now I&apos;m working with a company building a platform for <strong className="font-semibold text-foreground">AI-generated jewellery design</strong>.
           </p>
         </motion.div>
 
