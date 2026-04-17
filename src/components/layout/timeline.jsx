@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
+import { TechBadge } from "@/lib/tech-icons";
 
 const Timeline = ({ role, company, year, type, location, logo, logoPadding, invertLogo, responsibility, techstacks, index = 0 }) => {
   return (
@@ -74,14 +75,9 @@ const Timeline = ({ role, company, year, type, location, logo, logoPadding, inve
 
         <div className="space-y-1.5 md:space-y-2">
           <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground md:text-sm">Technology Used</p>
-          <div className="flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-1.5">
             {techstacks.map((tech, i) => (
-              <span
-                key={i}
-                className="rounded-full bg-black/[0.04] px-2 py-0.5 text-[10px] text-muted-foreground dark:bg-white/[0.06] md:px-2.5 md:text-[11px]"
-              >
-                {tech}
-              </span>
+              <TechBadge key={i} name={tech} />
             ))}
           </div>
         </div>

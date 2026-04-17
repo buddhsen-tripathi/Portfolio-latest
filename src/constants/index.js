@@ -148,8 +148,8 @@ export const experiences = [
       "Prisma",
       "Supabase",
       "OpenAI",
-      "Vector DB",
-      "RAG",
+      "Pinecone",
+      "Node.js",
     ],
   },
   {
@@ -161,11 +161,22 @@ export const experiences = [
     logo: "/Company/Navdyut.png",
     responsibility: [
       [
-        { text: "Built an " },
-        { text: "Assamese chatbot", bold: true },
-        { text: " on a " },
-        { text: "22B Mistral model", bold: true },
-        { text: " with RAG pipelines for translation and government applications." },
+        { text: "Got deep into " },
+        { text: "fine-tuning LLMs on low-resource Indian languages", bold: true },
+        { text: " using " },
+        { text: "Unsloth", bold: true },
+        { text: ", " },
+        { text: "containerizing models with Docker", bold: true },
+        { text: ", self-hosting them on servers, and exposing them as " },
+        { text: "public APIs", bold: true },
+        { text: "." },
+      ],
+      [
+        { text: "Used the " },
+        { text: "Brave Search API", bold: true },
+        { text: " to give the bot " },
+        { text: "real-time information", bold: true },
+        { text: " from the web." },
       ],
       [
         { text: "Scaled the system to " },
@@ -182,13 +193,15 @@ export const experiences = [
     ],
     techstacks: [
       "Mistral",
-      "RAG",
+      "Unsloth",
+      "Docker",
       "Langchain",
       "LlamaIndex",
       "Pinecone",
       "NextJS",
       "Tailwindcss",
       "Supabase",
+      "Drizzle",
     ],
   },
   {
@@ -342,7 +355,7 @@ export const hackathons = [
       { text: "IIM Shillong", bold: true },
       { text: " entrepreneurship event." },
     ],
-    techstacks: ["React Native", "Node.js", "MongoDB", "Google Maps API"],
+    techstacks: ["React JS", "Node.js", "MongoDB", "Google Maps API" ,"Gemini 1.5 Pro" ,"Python" , "YOLO" , "Vite"],
     link: "https://github.com/ShivaBhattacharjee/WasteEasy",
   },
   {
@@ -381,7 +394,7 @@ export const hackathons = [
       { text: "2nd prize at Hack GCU", bold: true },
       { text: "." },
     ],
-    techstacks: ["React", "Node.js", "Express", "MongoDB"],
+    techstacks: ["React", "Node.js", "Express", "MongoDB" , "Python" , "OpenCV"],
   },
   {
     title: "Campus Safety App",

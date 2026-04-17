@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import GithubIcon from "../icons/github";
+import { TechBadge } from "@/lib/tech-icons";
 
 const accentColor = {
   "1st Place":     "text-yellow-500 dark:text-yellow-400",
@@ -65,10 +66,12 @@ const HackathonEntry = ({ title, event, year, placement, college, body, techstac
           : body}
       </p>
 
-      {/* Tech — inline, editorial style */}
-      <p className="mt-2.5 text-[10px] text-muted-foreground/60 md:text-xs">
-        {techstacks.join(" · ")}
-      </p>
+      {/* Tech — colored badges */}
+      <div className="mt-3 flex flex-wrap gap-1.5">
+        {techstacks.map((tech, i) => (
+          <TechBadge key={i} name={tech} />
+        ))}
+      </div>
 
       {/* Link */}
       {link && (
