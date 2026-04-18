@@ -7,13 +7,15 @@ import { Button } from "@/components/ui/button";
 import MoonIcon from "./icons/moon";
 import SunIcon from "./icons/sun";
 import { playClickSound } from "@/lib/haptics";
+import { runThemeTransition, originFromEvent } from "@/lib/theme-transition";
 
 const Toggle = () => {
   const { theme, setTheme } = useTheme();
 
-  const toggleMode = () => {
+  const toggleMode = (event) => {
     playClickSound();
-    setTheme(theme === "dark" ? "light" : "dark");
+    const next = theme === "dark" ? "light" : "dark";
+    runThemeTransition(() => setTheme(next), originFromEvent(event));
   };
 
   return (
