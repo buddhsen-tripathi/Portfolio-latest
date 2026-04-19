@@ -31,10 +31,18 @@ const Footer = () => {
   }, []);
 
   useEffect(() => {
+    const cached = localStorage.getItem("pv_count");
+    if (cached) {
+      setVisitors(Number(cached).toLocaleString());
+      return;
+    }
     fetch("/api/visitors")
       .then((res) => res.json())
       .then((data) => {
-        if (data.count !== null) setVisitors(data.count.toLocaleString());
+        if (data.count !== null) {
+          localStorage.setItem("pv_count", data.count);
+          setVisitors(data.count.toLocaleString());
+        }
       })
       .catch(() => {});
   }, []);
@@ -104,16 +112,16 @@ const Footer = () => {
           )}
           {(battery !== null || visitors !== null) && (
             <span className="flex items-center gap-3">
-              {battery !== null && (
-                <span className="flex items-center gap-1">
-                  <BoltIcon className="h-3 w-3" />
-                  {battery}%
-                </span>
-              )}
               {visitors !== null && (
                 <span className="flex items-center gap-1">
                   <IconTelescopeTripod className="h-3 w-3" />
                   {visitors} visitors
+                </span>
+              )}
+              {battery !== null && (
+                <span className="flex items-center gap-1">
+                  <BoltIcon className="h-3 w-3" />
+                  {battery}%
                 </span>
               )}
             </span>
