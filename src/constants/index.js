@@ -304,7 +304,7 @@ export const projects = [
     category: "Side Project · Web App",
     description:
       "A typing speed test built around the Keychron keyboard aesthetic with audio feedback on every keystroke. Tracks WPM, accuracy, and stats with a clean, minimal UI.",
-    techstacks: ["Next.js", "TypeScript", "Motion", "Recharts", "shadcn/ui"],
+    techstacks: ["Next.js", "TypeScript", "Motion", "Recharts"],
     status: "active",
     link: "https://keyzen.theshiva.xyz/",
     preview: "/projects/keyzen-light.png",
@@ -323,7 +323,7 @@ export const projects = [
   {
     title: "Image Sonification",
     category: "Research Project · Web App",
-    description: "Converts images to audio and vice versa by mapping pixel colour and position to audio frequencies. Supports real-time playback, frequency mapping controls, and reverse synthesis to reconstruct images from generated audio files.",
+    description: "Converts images to audio by mapping pixel colour and position to audio frequencies. Supports real-time playback and reverse synthesis to reconstruct images from audio.",
     techstacks: ["React", "TypeScript", "Web Audio API", "Vite"],
     status: "active",
     link: "https://sonification.shiva.codes",

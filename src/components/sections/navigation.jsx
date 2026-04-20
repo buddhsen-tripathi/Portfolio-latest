@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import { navLinks } from "@/constants";
 import MoonIcon from "@/components/icons/moon";
@@ -30,7 +31,6 @@ const iconMap = {
 
 function NavigationBar() {
   const pathname = usePathname();
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState(pathname);
   const { theme, setTheme } = useTheme();
 
@@ -41,7 +41,6 @@ function NavigationBar() {
   const handleNavigation = (val) => {
     vibrateSelection();
     setActiveTab(val);
-    router.push(val);
   };
 
   const toggleMode = () => {
@@ -66,12 +65,17 @@ function NavigationBar() {
                   <TabsHighlightItem key={link.path} value={link.path}>
                     <TabsTrigger
                       value={link.path}
-                      className="flex flex-col items-center gap-0.5 rounded-full px-3.5 py-1.5 text-black/40 transition-colors duration-200 data-[state=active]:text-black dark:text-white/40 dark:data-[state=active]:text-white md:flex-row md:gap-2 md:px-5 md:py-2"
+                      asChild
                     >
-                      {Icon && <Icon className="h-[18px] w-[18px] md:h-[18px] md:w-[18px]" strokeWidth={1.5} />}
-                      <span className="text-[9px] font-medium tracking-wide md:text-[11px]">
-                        {link.name}
-                      </span>
+                      <Link
+                        href={link.path}
+                        className="flex flex-col items-center gap-0.5 rounded-full px-3.5 py-1.5 text-black/40 transition-colors duration-200 data-[state=active]:text-black dark:text-white/40 dark:data-[state=active]:text-white md:flex-row md:gap-2 md:px-5 md:py-2"
+                      >
+                        {Icon && <Icon className="h-[18px] w-[18px] md:h-[18px] md:w-[18px]" strokeWidth={1.5} />}
+                        <span className="text-[9px] font-medium tracking-wide md:text-[11px]">
+                          {link.name}
+                        </span>
+                      </Link>
                     </TabsTrigger>
                   </TabsHighlightItem>
                 );
