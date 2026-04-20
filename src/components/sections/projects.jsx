@@ -125,7 +125,7 @@ const Projects = ({
         <h1 className="mb-1.5 text-sm font-semibold md:text-base">{title}</h1>
         <p className="mb-3 font-space-mono text-[11px] leading-relaxed text-muted-foreground md:text-xs">{description}</p>
 
-        <div className="flex flex-wrap gap-1">
+        <div className="flex flex-wrap gap-1.5">
           {techstacks.map((tech, index) => (
             <TechBadge key={index} name={tech} />
           ))}
