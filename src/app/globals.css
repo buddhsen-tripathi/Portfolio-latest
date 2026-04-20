@@ -124,13 +124,3 @@ h6 {
   }
 }
 
-@media (max-width: 767px) {
-  #nprogress .bar {
-    top: auto !important;
-    bottom: 0 !important;
-  }
-  #nprogress .peg {
-    top: auto !important;
-    bottom: 0 !important;
-  }
-}
