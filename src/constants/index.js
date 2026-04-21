@@ -266,6 +266,15 @@ export const experiences = [
         { text: " latency" },
       ],
       [
+        { text: "Used " },
+        { text: "General Translation", bold: true },
+        { text: " to ship " },
+        { text: "multilingual app experiences", bold: true },
+        { text: " for " },
+        { text: "international clients", bold: true },
+        { text: "." },
+      ],
+      [
         { text: "Improved reliability and performance across microservices deployed with " },
         { text: "Docker", bold: true },
         { text: ", " },
