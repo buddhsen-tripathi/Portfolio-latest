@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
+
 import { TechBadge } from "@/lib/tech-icons";
 import { motion, AnimatePresence } from "motion/react";
 import { TaptickitIllustration } from "@/components/illustrations/taptickit-illustration";
-import IconStar from "@/components/icons/star";
+import { Star } from "lucide-react";
+
 
 const projectIllustrations = {
   taptickit: TaptickitIllustration,
@@ -129,12 +130,10 @@ const Projects = ({
 <div className="mb-2 flex items-center justify-between">
           <p className="text-[10px] font-medium text-muted-foreground md:text-[11px]">{category}</p>
           <div className="flex items-center gap-2">
-            <Badge variant={status}>
-              {status === "active" ? "Active" : "Discontinued"}
-            </Badge>
+        
             {stars !== null && stars !== undefined && (
               <span className={`flex items-center gap-0.5 text-[10px] font-medium text-muted-foreground transition-colors duration-300 md:text-xs ${isHovered ? "text-yellow-500" : ""}`}>
-                <IconStar size="12px" className={isHovered ? "text-yellow-500" : "text-muted-foreground"} />
+<Star size={"12px"} className={isHovered ? "fill-yellow-500" : "fill-muted-foreground"} />
                 {stars}
               </span>
             )}
