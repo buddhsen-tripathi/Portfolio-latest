@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "motion/react";
 import XTwitterIcon from "@/components/icons/x-twitter";
 import GithubIcon from "@/components/icons/github";
 import LinkedinIcon from "@/components/icons/linkedin";
@@ -15,6 +15,9 @@ import ClipboardIcon from "@/components/icons/clipboard";
 import { CornerBrackets } from "@/components/ui/corner-brackets";
 import { notableAchievements } from "@/constants";
 
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import LocationIcon from "@/components/icons/location";
+
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 16 },
   animate: { opacity: 1, y: 0 },
@@ -27,24 +30,32 @@ const socialLinks = [
     href: "https://x.com/sh17va",
     icon: <XTwitterIcon className="h-3.5 w-3.5" />,
     external: true,
+    platform: "twitter",
+    username: "sh17va",
   },
   {
     label: "Github",
     href: "https://github.com/shivabhattacharjee",
     icon: <GithubIcon className="h-3.5 w-3.5" />,
     external: true,
+    platform: "github",
+    username: "shivabhattacharjee",
   },
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/shiva-bhattacharjee/",
     icon: <LinkedinIcon className="h-3.5 w-3.5" />,
     external: true,
+    platform: "linkedin",
+    username: "shiva-bhattacharjee",
   },
   {
     label: "Discord",
     href: "https://discordapp.com/users/503152077824851968",
     icon: <DiscordIcon className="h-3.5 w-3.5" />,
     external: true,
+    platform: "discord",
+    username: "503152077824851968",
   },
   {
     label: "Email",
@@ -54,8 +65,106 @@ const socialLinks = [
   },
 ];
 
-function SocialButton({ label, href, icon, external }) {
+function SocialPreviewCard({ loading, data, platform, username }) {
+
+
+  if (loading) {
+    return (
+      <div className="flex w-[320px] flex-col gap-4 font-space-mono animate-pulse">
+        <div className="flex items-center gap-3">
+          <div className="h-14 w-14 rounded-full bg-muted"></div>
+          <div className="flex flex-col gap-2">
+            <div className="h-4 w-32 rounded bg-muted"></div>
+            <div className="h-3 w-20 rounded bg-muted"></div>
+          </div>
+        </div>
+        <div className="h-10 w-full rounded bg-muted"></div>
+        <div className="h-4 w-24 rounded bg-muted"></div>
+        <div className="mt-2 flex gap-4">
+          <div className="h-4 w-16 rounded bg-muted"></div>
+          <div className="h-4 w-16 rounded bg-muted"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!data) return null;
+
   return (
+    <div className="flex w-[320px] flex-col gap-2 font-space-mono text-left">
+      {data.banner && (
+        <div className="-mx-4 -mt-4 mb-2 h-20 overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={data.banner} alt="Banner" className="h-full w-full object-cover" />
+        </div>
+      )}
+      <div className={`flex gap-3 relative z-10 ${data.banner ? "flex-col items-start -mt-12" : "items-center"}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={data.avatar || "https://github.com/shivabhattacharjee.png"}
+          alt={data.name}
+          className={`rounded-full object-cover bg-background ${data.banner ? "h-[68px] w-[68px] border-[3px] border-card" : "h-14 w-14 border border-border"}`}
+        />
+        <div className={`flex flex-col ${data.banner ? "-mt-1" : ""}`}>
+          <span className="font-doto text-base font-bold text-foreground">
+            {data.name}
+          </span>
+          <span className="text-sm text-muted-foreground">
+            {data.username}
+          </span>
+        </div>
+      </div>
+      {data.bio && (
+        <p className="text-sm text-foreground line-clamp-3">
+          {data.bio}
+        </p>
+      )}
+      {data.location && (
+        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <LocationIcon className="h-4 w-4 shrink-0" />
+          <span className="line-clamp-1">{data.location}</span>
+        </div>
+      )}
+      {data.stats && data.stats.length > 0 && (
+        <div className="mt-2 flex gap-4 text-sm text-muted-foreground">
+          {data.stats.map((stat, i) => (
+            <span key={i}>
+              <strong className="font-doto font-semibold text-foreground">
+                {stat.value}
+              </strong>{" "}
+              {stat.label}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SocialButton({ label, href, icon, external, platform, username, data, loading }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
+
+  const handleMouseMove = (e) => {
+    x.set(e.clientX - 160);
+    y.set(e.clientY + 12);
+  };
+
+  const handleMouseEnter = (e) => {
+    // Jump the spring immediately to current cursor so it doesn't fly in from top-left
+    x.set(e.clientX - 160);
+    y.set(e.clientY + 12);
+    springX.jump(e.clientX - 160);
+    springY.jump(e.clientY + 12);
+    setIsHovered(true);
+  };
+
+  const content = (
     <Link
       href={href}
       target={external ? "_blank" : undefined}
@@ -69,6 +178,41 @@ function SocialButton({ label, href, icon, external }) {
       </CornerBrackets>
     </Link>
   );
+
+  if (platform && username) {
+    return (
+      <div
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={() => setIsHovered(false)}
+        onMouseMove={handleMouseMove}
+        className="relative"
+      >
+        {content}
+        <AnimatePresence>
+          {isHovered && (
+            <motion.div
+              initial={{ opacity: 0, x: -10, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -10, scale: 0.95 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="flex w-[320px] flex-col gap-3 rounded-xl overflow-hidden bg-background/30 backdrop-blur-2xl backdrop-saturate-150 p-4 shadow-2xl border border-white/20 dark:border-white/10"
+              style={{
+                position: "fixed",
+                left: springX,
+                top: springY,
+                zIndex: 9999,
+                pointerEvents: "none",
+              }}
+            >
+              <SocialPreviewCard platform={platform} username={username} data={data} loading={loading} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  }
+
+  return content;
 }
 
 const WaveEmoji = () => {
@@ -106,6 +250,27 @@ const WaveEmoji = () => {
 };
 
 const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
+  const [socialData, setSocialData] = useState(null);
+  const [socialsLoading, setSocialsLoading] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+    fetch("/api/socials")
+      .then((res) => res.json())
+      .then((data) => {
+        if (mounted && !data.error) {
+          setSocialData(data);
+        }
+        if (mounted) setSocialsLoading(false);
+      })
+      .catch(() => {
+        if (mounted) setSocialsLoading(false);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <div className="mx-auto flex flex-col gap-10 md:max-w-4xl">
       <motion.div className="flex flex-col gap-6" {...fadeUp(0)}>
@@ -182,13 +347,17 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
             if you wish to connect with me
           </p>
           <div className="flex flex-wrap gap-2 p-1">
-            {socialLinks.map(({ label, href, icon, external }) => (
+            {socialLinks.map(({ label, href, icon, external, platform, username }) => (
               <SocialButton
                 key={label}
                 label={label}
                 href={href}
                 icon={icon}
                 external={external}
+                platform={platform}
+                username={username}
+                data={socialData?.[platform]}
+                loading={socialsLoading}
               />
             ))}
           </div>
@@ -250,6 +419,7 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
           </ul>
         </motion.div>
       </div>
+
     </div>
   );
 };

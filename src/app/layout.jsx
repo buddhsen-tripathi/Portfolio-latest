@@ -6,6 +6,7 @@ import TopLoader from "@/components/top-loader";
 import OnekoCat from "@/components/OnekoCat";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ScrollToTopButton } from "@/components/scroll-to-top";
 
 export const metadata = {
   title: {
@@ -142,6 +143,7 @@ export default function RootLayout({ children }) {
               <Footer />
               <NavigationBar />
               <Toaster />
+              <ScrollToTopButton />
             </div>
           </SmoothScrollProvider>
         </ThemeProvider>
