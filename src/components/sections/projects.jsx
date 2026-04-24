@@ -93,7 +93,7 @@ const Projects = ({
           >
             {Illustration ? (
               <div
-                className={`absolute inset-0 flex items-center justify-center transition-[filter] duration-500 ${isHovered ? "grayscale-0" : "grayscale"}`}
+                className={`absolute inset-0 flex items-center justify-center transition-[filter] duration-500 ${isHovered ? "md:grayscale-0" : "md:grayscale"}`}
               >
                 <Illustration isCardHovered={isHovered} />
               </div>
@@ -105,7 +105,7 @@ const Projects = ({
                   fill
                   sizes={previewSizes}
                   loading="eager"
-                  className={`object-cover transition-[filter] duration-500 dark:hidden ${isHovered ? "grayscale-0" : "grayscale"}`}
+                  className={`object-cover transition-[filter] duration-500 dark:hidden ${isHovered ? "md:grayscale-0" : "md:grayscale"}`}
                 />
                 <Image
                   src={previewDark}
@@ -113,7 +113,7 @@ const Projects = ({
                   fill
                   sizes={previewSizes}
                   loading="eager"
-                  className={`hidden object-cover transition-[filter] duration-500 dark:block ${isHovered ? "grayscale-0" : "grayscale"}`}
+                  className={`hidden object-cover transition-[filter] duration-500 dark:block ${isHovered ? "md:grayscale-0" : "md:grayscale"}`}
                 />
               </>
             ) : (
@@ -123,7 +123,7 @@ const Projects = ({
                   fill
                   sizes={previewSizes}
                   loading="eager"
-                  className={`object-cover transition-[filter] duration-500 ${isHovered ? "grayscale-0" : "grayscale"}`}
+                  className={`object-cover transition-[filter] duration-500 ${isHovered ? "md:grayscale-0" : "md:grayscale"}`}
                 />
             )}
           </div>
