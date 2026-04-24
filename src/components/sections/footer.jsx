@@ -6,13 +6,18 @@ import BoltIcon from "@/components/icons/bolt";
 import CloudSunIcon from "@/components/icons/cloud-sun";
 import SeikoWatchModal from "@/components/watch-modal";
 import IconTelescopeTripod from "@/components/icons/telescope-tripod";
+import { useViews } from "@/components/blog/views-context";
+
+const SITE_VISITORS_SLUG = "_site_visitors";
 
 const Footer = () => {
   const [time, setTime] = useState(null);
   const [battery, setBattery] = useState(null);
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
-  const [visitors, setVisitors] = useState(null);
+  const { getViews, incrementViews } = useViews();
+  const visitorCount = getViews(SITE_VISITORS_SLUG);
+
   useEffect(() => {
     const tick = () => setTime(new Date());
     tick();
@@ -31,21 +36,8 @@ const Footer = () => {
   }, []);
 
   useEffect(() => {
-    const cached = localStorage.getItem("pv_count");
-    if (cached) {
-      setVisitors(Number(cached).toLocaleString());
-      return;
-    }
-    fetch("/api/visitors")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.count !== null) {
-          localStorage.setItem("pv_count", data.count);
-          setVisitors(data.count.toLocaleString());
-        }
-      })
-      .catch(() => {});
-  }, []);
+    incrementViews(SITE_VISITORS_SLUG);
+  }, [incrementViews]);
 
   useEffect(() => {
     fetch("/api/location")
@@ -110,12 +102,12 @@ const Footer = () => {
               )}
             </span>
           )}
-          {(battery !== null || visitors !== null) && (
+          {(battery !== null || visitorCount !== null) && (
             <span className="flex items-center gap-3">
-              {visitors !== null && (
+              {visitorCount !== null && (
                 <span className="flex items-center gap-1">
                   <IconTelescopeTripod className="h-3 w-3" />
-                  {visitors} visitors
+                  {visitorCount.toLocaleString()} visitors
                 </span>
               )}
               {battery !== null && (
@@ -128,7 +120,7 @@ const Footer = () => {
           )}
         </div>
         <p className="text-xs text-muted-foreground/60">
-          &copy; {new Date().getFullYear()} Shiva Bhattacharjee. All rights
+          &copy; {new Date().getFullYear()} Buddhsen Tripathi. All rights
           reserved.
         </p>
       </div>

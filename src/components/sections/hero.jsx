@@ -1,19 +1,29 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "motion/react";
 import XTwitterIcon from "@/components/icons/x-twitter";
 import GithubIcon from "@/components/icons/github";
 import LinkedinIcon from "@/components/icons/linkedin";
-import DiscordIcon from "@/components/icons/discord";
 import { IoIosMail } from "react-icons/io";
+import { SiLeetcode, SiCodeforces, SiTryhackme } from "react-icons/si";
+import { FileText, Check, Calendar, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import Link from "next/link";
 import { GeistPixelSquare } from "geist/font/pixel";
 import GitHubContributionGraph from "./contribution-graph";
-import ClipboardIcon from "@/components/icons/clipboard";
 import { CornerBrackets } from "@/components/ui/corner-brackets";
-import { notableAchievements } from "@/constants";
+import { TechBadge } from "@/lib/tech-icons";
+import { hackathons } from "@/constants";
+
+const placementColor = {
+  "1st Place": "text-amber-500 dark:text-amber-400",
+  "2nd Place": "text-zinc-400",
+  "3rd Place": "text-amber-700",
+  "Bounty Winner": "text-emerald-500 dark:text-emerald-400",
+  "Qualifier": "text-sky-500 dark:text-sky-400",
+};
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import LocationIcon from "@/components/icons/location";
@@ -27,40 +37,71 @@ const fadeUp = (delay = 0) => ({
 const socialLinks = [
   {
     label: "Twitter",
-    href: "https://x.com/sh17va",
+    href: "https://x.com/btr1pathi",
     icon: <XTwitterIcon className="h-3.5 w-3.5" />,
     external: true,
     platform: "twitter",
-    username: "sh17va",
+    username: "btr1pathi",
   },
   {
     label: "Github",
-    href: "https://github.com/shivabhattacharjee",
+    href: "https://github.com/buddhsen-tripathi",
     icon: <GithubIcon className="h-3.5 w-3.5" />,
     external: true,
     platform: "github",
-    username: "shivabhattacharjee",
+    username: "buddhsen-tripathi",
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/shiva-bhattacharjee/",
+    href: "https://www.linkedin.com/in/buddhsen-tripathi/",
     icon: <LinkedinIcon className="h-3.5 w-3.5" />,
     external: true,
     platform: "linkedin",
-    username: "shiva-bhattacharjee",
+    username: "buddhsen-tripathi",
   },
   {
-    label: "Discord",
-    href: "https://discordapp.com/users/503152077824851968",
-    icon: <DiscordIcon className="h-3.5 w-3.5" />,
+    label: "LeetCode",
+    href: "https://leetcode.com/u/buddhsen",
+    icon: <SiLeetcode className="h-3.5 w-3.5" />,
     external: true,
-    platform: "discord",
-    username: "503152077824851968",
+    platform: "leetcode",
+    username: "buddhsen",
+  },
+  {
+    label: "TryHackMe",
+    href: "https://tryhackme.com/p/btripathi",
+    icon: <SiTryhackme className="h-3.5 w-3.5" />,
+    external: true,
+    platform: "tryhackme",
+    username: "btripathi",
+  },
+  {
+    label: "Codeforces",
+    href: "https://codeforces.com/profile/Buddhsen",
+    icon: <SiCodeforces className="h-3.5 w-3.5" />,
+    external: true,
+    platform: "codeforces",
+    username: "Buddhsen",
+  },
+];
+
+const connectLinks = [
+  {
+    label: "schedule a meet",
+    href: "https://cal.com/buddhsen",
+    icon: <Calendar className="h-3.5 w-3.5" />,
+    endIcon: <ArrowUpRight className="h-3 w-3" />,
+    external: true,
   },
   {
     label: "Email",
-    href: "mailto:hello@theshiva.xyz",
     icon: <IoIosMail size="14px" />,
+    copyText: "bt2609@nyu.edu",
+  },
+  {
+    label: "Resume",
+    href: "/Resume.pdf",
+    icon: <FileText className="h-3.5 w-3.5" />,
     external: true,
   },
 ];
@@ -101,7 +142,7 @@ function SocialPreviewCard({ loading, data, platform, username }) {
       <div className={`flex gap-3 relative z-10 ${data.banner ? "flex-col items-start -mt-12" : "items-center"}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={data.avatar || "https://github.com/shivabhattacharjee.png"}
+          src={data.avatar || "https://github.com/buddhsen-tripathi.png"}
           alt={data.name}
           className={`rounded-full object-cover bg-background ${data.banner ? "h-[68px] w-[68px] border-[3px] border-card" : "h-14 w-14 border border-border"}`}
         />
@@ -141,7 +182,7 @@ function SocialPreviewCard({ loading, data, platform, username }) {
   );
 }
 
-function SocialButton({ label, href, icon, external, platform, username, data, loading }) {
+function SocialButton({ label, href, icon, endIcon, external, platform, username, data, loading, copyText }) {
   const [isHovered, setIsHovered] = useState(false);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -164,7 +205,24 @@ function SocialButton({ label, href, icon, external, platform, username, data, l
     setIsHovered(true);
   };
 
-  const content = (
+  const handleCopy = () => {
+    navigator.clipboard.writeText(copyText);
+    toast.success("Copied to clipboard", {
+      description: copyText,
+      icon: <Check className="h-4 w-4" />,
+      classNames: { description: "font-space-mono" },
+    });
+  };
+
+  const content = copyText ? (
+    <CornerBrackets>
+      <Button size="sm" variant="noShadow" onClick={handleCopy}>
+        {icon}
+        <span className="ml-1.5">{label}</span>
+        {endIcon && <span className="ml-1.5">{endIcon}</span>}
+      </Button>
+    </CornerBrackets>
+  ) : (
     <Link
       href={href}
       target={external ? "_blank" : undefined}
@@ -174,6 +232,7 @@ function SocialButton({ label, href, icon, external, platform, username, data, l
         <Button size="sm" variant="noShadow">
           {icon}
           <span className="ml-1.5">{label}</span>
+          {endIcon && <span className="ml-1.5">{endIcon}</span>}
         </Button>
       </CornerBrackets>
     </Link>
@@ -273,58 +332,33 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
 
   return (
     <div className="mx-auto flex flex-col gap-10 md:max-w-4xl">
-      <motion.div className="flex flex-col gap-6" {...fadeUp(0)}>
-        <div className={GeistPixelSquare.className}>
-          <p className="mb-3 font-doto text-xs text-muted-foreground md:text-sm">
-            Hola I&apos;m <WaveEmoji />
-          </p>
+      <motion.div className="flex flex-col gap-3" {...fadeUp(0)}>
+        <p className="font-doto text-xs text-muted-foreground md:text-sm">
+          Hola I&apos;m <WaveEmoji />
+        </p>
 
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <h1 className="text-2xl font-bold uppercase tracking-tight md:text-4xl">
-              Shiva Bhattacharjee
-            </h1>
+        <div className="flex flex-row items-center justify-between gap-4">
+          <div className={`min-w-0 ${GeistPixelSquare.className}`}>
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h1 className="text-2xl font-bold uppercase tracking-tight md:text-4xl">
+                Buddhsen Tripathi
+              </h1>
+            </div>
+
+            <p className="mt-2 text-[11px] font-medium uppercase tracking-widest text-muted-foreground md:text-sm">
+              Full-Stack Developer &bull; MS CS @ NYU
+            </p>
           </div>
 
-          <p className="mt-2 text-[11px] font-medium uppercase tracking-widest text-muted-foreground md:text-sm">
-            I work on AI, LLMs, and building developer tools on top of them
-          </p>
+          <Image
+            src="/profpic.jpg"
+            alt="Buddhsen Tripathi"
+            width={128}
+            height={128}
+            priority
+            className="h-20 w-20 shrink-0 rounded-full border border-black/[0.08] object-cover dark:border-white/[0.08] md:h-28 md:w-28"
+          />
         </div>
-
-        <motion.div
-          className={`flex flex-row items-end gap-4 p-1 ${GeistPixelSquare.className}`}
-          {...fadeUp(0.08)}
-        >
-          <CornerBrackets>
-            <Button
-              size="sm"
-              onClick={() => {
-                navigator.clipboard.writeText("npx shivadev");
-                toast.success("Copied to clipboard", {
-                  description: "You can now paste it in your terminal to see the cli version of my portfolio",
-                  icon: <ClipboardIcon className="h-4 w-4" />,
-                  classNames: { description: "font-space-mono" },
-                });
-              }}
-            >
-              <ClipboardIcon className="mr-1.5 h-3 w-3" /> npx shivadev
-            </Button>
-          </CornerBrackets>
-          <div className="relative -ml-1 flex items-center">
-            <svg
-              className="pointer-events-none size-5 shrink-0 rotate-[190deg] text-muted-foreground/40"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 323.057 323.057"
-              xmlSpace="preserve"
-              fill="currentColor"
-            >
-              <path d="M281.442 256.312c-47.124 59.364-139.536 44.676-160.956-29.376-1.224-3.672-1.836-7.956-2.448-11.628 49.572-11.016 97.92-47.124 102.204-90.576 3.672-39.168-36.108-50.796-62.424-28.764-31.212 26.316-53.244 64.872-55.08 105.875-31.824 4.284-63.036-4.284-80.172-35.496-28.764-52.631 9.792-123.624 61.2-144.432 5.508-1.836 3.06-10.404-2.448-8.568C10.326 33.544-26.394 132.688 21.954 191.439c18.972 22.645 49.572 29.988 81.396 26.316 4.284 41.616 36.72 74.664 75.275 87.516 44.676 14.688 85.68-6.731 111.996-41.616 4.285-5.508-4.896-12.239-9.179-7.343M144.354 132.688c9.792-13.464 22.644-28.764 39.168-34.272 15.911-5.508 21.42 16.524 22.031 26.316.612 12.24-7.956 23.256-15.912 31.824-16.523 18.971-44.063 35.496-72.215 42.839 1.836-23.868 13.464-47.123 26.928-66.707" />
-              <path d="M315.713 233.668c-17.136 0-34.884 1.224-51.408 5.508-6.731 1.836-3.672 11.016 3.061 9.792 13.464-2.448 27.54-1.836 41.004-1.224-.612 7.955-1.224 16.523-2.448 24.479-1.224 6.12-5.508 15.3-1.836 21.42 1.836 3.061 4.896 3.061 7.956 1.836 7.344-3.06 7.344-15.912 8.568-22.644 1.836-11.017 2.447-21.42 2.447-32.437 0-3.67-3.672-6.73-7.344-6.73" />
-            </svg>
-            <span className="ml-2 -rotate-[8deg] whitespace-nowrap text-[10px] text-muted-foreground/50 md:text-xs">
-              try this in <br /> your terminal
-            </span>
-          </div>
-        </motion.div>
       </motion.div>
 
       <div className="space-y-8">
@@ -333,10 +367,10 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
             About Me
           </h5>
           <p className="text-xs font-space-mono md:text-base md:leading-relaxed text-muted-foreground">
-            I&apos;m Shiva, an <strong className="font-semibold text-foreground">Applied AI Engineer</strong>. Got into coding in 9th grade, spent a few years doing freelance work with PHP and jQuery before landing on React. The project that taught me the most was <strong className="font-semibold text-foreground"><a href="https://github.com/shivabhattacharjee/animetrix-next" target="_blank" className="underline">Animetrix</a></strong>, an anime streaming site I built in college that hit <strong className="font-semibold text-foreground">15k users and 200 GitHub stars </strong>. It was technically piracy (I was naive), broke constantly under traffic, which taught me about scalability. I rewrote the infra from scratch and got it to handle <strong className="font-semibold text-foreground">20k users</strong>, picking up <strong className="font-semibold text-foreground">Redis, Docker, horizontal scaling, and YAML </strong> along the way. Eventually got DMCA&apos;d. Worth it.
+            Hey there! I&apos;m a <strong className="font-semibold text-foreground">software professional</strong> passionate about building <strong className="font-semibold text-foreground">scalable, user-centric applications</strong> with expertise in <strong className="font-semibold text-foreground">cloud infrastructure and microservices architecture</strong>.
           </p>
           <p className="mt-4 text-xs font-space-mono md:text-base md:leading-relaxed text-muted-foreground">
-            Won <strong className="font-semibold text-foreground">5 hackathons</strong>, including qualifying for <strong className="font-semibold text-foreground">Smart India Hackathon 2023</strong> in my first semester, first from my college with roughly a ~1% selection rate. Since then I&apos;ve shipped production AI systems at a few early-stage startups. One of them I joined as a founding engineer, where I got deep into <strong className="font-semibold text-foreground">fine-tuning LLMs on low-resource Indian languages</strong> using <strong className="font-semibold text-foreground">Unsloth</strong>, containerizing models with <strong className="font-semibold text-foreground">Docker</strong>, self-hosting on servers, and exposing them as public APIs. Right now I&apos;m working at <strong className="font-semibold text-foreground"><a href="https://www.usebez.ai" target="_blank" className="underline">Bez</a></strong>, building an <strong className="font-semibold text-foreground">AI copilot for jewellery designers</strong> — where I get to work with <strong className="font-semibold text-foreground">AI agent workflows</strong>, <strong className="font-semibold text-foreground">vector search</strong>, <strong className="font-semibold text-foreground">RAG-based memory</strong>, and <strong className="font-semibold text-foreground">multimodal image pipelines</strong>.
+            Currently pursuing my <strong className="font-semibold text-foreground"><a href="https://www.nyu.edu" target="_blank" className="underline">MS in Computer Science at NYU</a></strong> with <strong className="font-semibold text-foreground">2+ years</strong> of experience in full-stack development. Previously spent over two years at <strong className="font-semibold text-foreground"><a href="https://amadeus.com/en" target="_blank" className="underline">Amadeus</a></strong> working on <strong className="font-semibold text-foreground">Java, Spring Boot, Angular, and Azure-backed microservices</strong>. In my free time, I enjoy <strong className="font-semibold text-foreground">building projects</strong>, exploring <strong className="font-semibold text-foreground">cybersecurity</strong>, and contributing to <strong className="font-semibold text-foreground">open-source</strong>.
           </p>
         </motion.div>
 
@@ -347,7 +381,7 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
             if you wish to connect with me
           </p>
           <div className="flex flex-wrap gap-2 p-1">
-            {socialLinks.map(({ label, href, icon, external, platform, username }) => (
+            {socialLinks.map(({ label, href, icon, external, platform, username, copyText }) => (
               <SocialButton
                 key={label}
                 label={label}
@@ -356,6 +390,7 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
                 external={external}
                 platform={platform}
                 username={username}
+                copyText={copyText}
                 data={socialData?.[platform]}
                 loading={socialsLoading}
               />
@@ -370,53 +405,92 @@ const Hero = ({ contributionData = [], lifetimeTotal = 0 }) => {
           />
         </motion.div>
 
-        <motion.div {...fadeUp(0.45)}>
-          <h5 className="mb-4 font-doto text-2xl font-medium md:text-3xl">
-            Notable achievements
-          </h5>
-          <ul className="space-y-6">
-            {notableAchievements.map(({ title, body, link, linkLabel }) => (
-              <li
-                key={title}
-                className="border-l-2 border-muted-foreground/25 pl-4"
-              >
-                <span className="text-sm font-semibold text-foreground md:text-base">
-                  {title}.{" "}
-                </span>
-                <span className="font-space-mono text-sm leading-relaxed text-muted-foreground md:text-base">
-                  {Array.isArray(body)
-                    ? body.map((seg, i) =>
-                        seg.href ? (
-                          <Link
-                            key={i}
-                            href={seg.href}
-                            className="font-semibold text-foreground underline underline-offset-2 transition-colors hover:text-foreground/70"
-                          >
-                            {seg.text}
-                          </Link>
-                        ) : seg.bold ? (
-                          <strong key={i} className="font-semibold text-foreground">
-                            {seg.text}
-                          </strong>
-                        ) : (
-                          <span key={i}>{seg.text}</span>
+        {hackathons.length > 0 && (
+          <motion.div {...fadeUp(0.45)}>
+            <h5 className="mb-4 font-doto text-2xl font-medium md:text-3xl">
+              Hackathons
+            </h5>
+            <div className="space-y-6">
+              {hackathons.map((hack) => (
+                <article
+                  key={hack.title}
+                  className="border-l-2 border-black/[0.08] pl-4 dark:border-white/[0.08]"
+                >
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                    <h3 className="font-doto text-base font-medium text-foreground md:text-lg">
+                      {hack.event}
+                    </h3>
+                    <span
+                      className={`font-doto text-xs md:text-sm ${
+                        placementColor[hack.placement] ?? "text-muted-foreground"
+                      }`}
+                    >
+                      [{hack.placement}]
+                    </span>
+                    {hack.link && (
+                      <Link
+                        href={hack.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ml-auto inline-flex items-center gap-0.5 font-space-mono text-xs text-muted-foreground transition-colors hover:text-foreground md:text-sm"
+                      >
+                        info
+                        <ArrowUpRight className="h-3 w-3" />
+                      </Link>
+                    )}
+                  </div>
+
+                  <p className="mt-1.5 font-space-mono text-xs leading-relaxed text-muted-foreground md:text-sm">
+                    {Array.isArray(hack.body)
+                      ? hack.body.map((seg, i) =>
+                          seg.bold ? (
+                            <strong key={i} className="font-semibold text-foreground">
+                              {seg.text}
+                            </strong>
+                          ) : (
+                            <span key={i}>{seg.text}</span>
+                          )
                         )
-                      )
-                    : body}
-                </span>
-                {link && (
-                  <Link
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ml-1 text-sm text-foreground/70 underline underline-offset-2 transition-colors hover:text-foreground md:text-base"
-                  >
-                    {linkLabel}
-                  </Link>
-                )}
-              </li>
+                      : hack.body}
+                  </p>
+
+                  <p className="mt-2 font-space-mono text-[10px] uppercase tracking-wider text-muted-foreground/70 md:text-xs">
+                    {hack.college} &middot; {hack.year}
+                  </p>
+
+                  {hack.techstacks?.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {hack.techstacks.map((tech, i) => (
+                        <TechBadge key={i} name={tech} />
+                      ))}
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        <motion.div {...fadeUp(0.55)}>
+          <h5 className="mb-4 font-doto text-2xl font-medium md:text-3xl">
+            Let&apos;s connect
+          </h5>
+          <p className="mb-4 font-space-mono text-xs leading-relaxed text-muted-foreground md:text-sm">
+            Interested in working together? Feel free to schedule a meet!
+          </p>
+          <div className="flex flex-wrap gap-2 p-1">
+            {connectLinks.map(({ label, href, icon, endIcon, external, copyText }) => (
+              <SocialButton
+                key={label}
+                label={label}
+                href={href}
+                icon={icon}
+                endIcon={endIcon}
+                external={external}
+                copyText={copyText}
+              />
             ))}
-          </ul>
+          </div>
         </motion.div>
       </div>
 
