@@ -34,12 +34,12 @@ import {
   SiGithubactions,
   SiNestjs,
   SiPostgresql,
-  SiAmazonwebservices,
   SiTypescript,
   SiJavascript,
   SiHtml5,
-  SiCss3,
+  SiCss,
 } from "react-icons/si";
+import { FaAws } from "react-icons/fa";
 import { VscAzure } from "react-icons/vsc";
 import { Database, Sparkles, Brain, Boxes, Network, Activity, Code2, Flame, Cpu, Eye, Cloud, Link2, Rocket, Volume2, Plug, Workflow } from "lucide-react";
 
@@ -115,11 +115,11 @@ const TECH_META = {
   NestJS: { Icon: SiNestjs, color: "#E0234E" },
   "Nest.js": { Icon: SiNestjs, color: "#E0234E" },
   PostgreSQL: { Icon: SiPostgresql, color: "#4169E1" },
-  AWS: { Icon: SiAmazonwebservices, color: "#FF9900" },
+  AWS: { Icon: FaAws, color: "#FF9900" },
   TypeScript: { Icon: SiTypescript, color: "#3178C6" },
   JavaScript: { Icon: SiJavascript, color: "#F7DF1E" },
   HTML: { Icon: SiHtml5, color: "#E34F26" },
-  CSS: { Icon: SiCss3, color: "#1572B6" },
+  CSS: { Icon: SiCss, color: "#1572B6" },
   "Tailwind CSS": { Icon: SiTailwindcss, color: "#06B6D4" },
   "OpenAI API": { Icon: SiOpenai, adaptive: true },
 };
