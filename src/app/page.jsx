@@ -5,7 +5,7 @@ import { fetchGitHubContributions } from "@/lib/github";
 export const revalidate = 3600;
 
 export const metadata = {
-  title: "Shiva Bhattacharjee",
+  title: "Buddhsen Tripathi",
 };
 
 export default async function About() {

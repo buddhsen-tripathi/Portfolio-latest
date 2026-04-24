@@ -26,8 +26,22 @@ import {
   SiGooglegemini,
   SiNasa,
   SiVite,
+  SiOpenjdk,
+  SiSpringboot,
+  SiCplusplus,
+  SiAngular,
+  SiMysql,
+  SiGithubactions,
+  SiNestjs,
+  SiPostgresql,
+  SiAmazonwebservices,
+  SiTypescript,
+  SiJavascript,
+  SiHtml5,
+  SiCss3,
 } from "react-icons/si";
-import { Database, Sparkles, Brain, Boxes, Network, Activity, Code2, Flame, Cpu, Eye, Cloud, Link2, Rocket, Volume2 } from "lucide-react";
+import { VscAzure } from "react-icons/vsc";
+import { Database, Sparkles, Brain, Boxes, Network, Activity, Code2, Flame, Cpu, Eye, Cloud, Link2, Rocket, Volume2, Plug, Workflow } from "lucide-react";
 
 // adaptive => use currentColor (good for monochrome brands so they stay visible in dark/light)
 const TECH_META = {
@@ -84,6 +98,30 @@ const TECH_META = {
   Hardhat: { Icon: Flame, color: "#F0B90B" },
   "Web3.js": { Icon: Link2, color: "#F16822" },
   "Web Audio API": { Icon: Volume2, color: "#8B5CF6" },
+
+  // backend / enterprise stack
+  Java: { Icon: SiOpenjdk, color: "#ED8B00" },
+  "Spring Boot": { Icon: SiSpringboot, color: "#6DB33F" },
+  "C++": { Icon: SiCplusplus, color: "#00599C" },
+  Angular: { Icon: SiAngular, color: "#DD0031" },
+  MySQL: { Icon: SiMysql, color: "#4479A1" },
+  Azure: { Icon: VscAzure, color: "#0078D4" },
+  "REST APIs": { Icon: Plug, color: "#0EA5E9" },
+  Microservices: { Icon: Boxes, color: "#8B5CF6" },
+  "CI/CD": { Icon: SiGithubactions, color: "#2088FF" },
+  Workflow: { Icon: Workflow, color: "#6366F1" },
+
+  // project stack
+  NestJS: { Icon: SiNestjs, color: "#E0234E" },
+  "Nest.js": { Icon: SiNestjs, color: "#E0234E" },
+  PostgreSQL: { Icon: SiPostgresql, color: "#4169E1" },
+  AWS: { Icon: SiAmazonwebservices, color: "#FF9900" },
+  TypeScript: { Icon: SiTypescript, color: "#3178C6" },
+  JavaScript: { Icon: SiJavascript, color: "#F7DF1E" },
+  HTML: { Icon: SiHtml5, color: "#E34F26" },
+  CSS: { Icon: SiCss3, color: "#1572B6" },
+  "Tailwind CSS": { Icon: SiTailwindcss, color: "#06B6D4" },
+  "OpenAI API": { Icon: SiOpenai, adaptive: true },
 };
 
 const DEFAULT = { Icon: Code2, adaptive: true };

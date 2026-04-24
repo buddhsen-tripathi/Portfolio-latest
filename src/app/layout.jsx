@@ -7,16 +7,17 @@ import OnekoCat from "@/components/OnekoCat";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ScrollToTopButton } from "@/components/scroll-to-top";
+import { ViewsProvider } from "@/components/blog/views-context";
 
 export const metadata = {
   title: {
-    template: "%s | Shiva Bhattacharjee",
-    default: "Shiva Bhattacharjee - Full Stack Developer",
+    template: "%s | Buddhsen Tripathi",
+    default: "Buddhsen Tripathi - Full Stack Developer",
   },
   description:
-    "Hello there I am Shiva a full stack developer and I love to build products that make people's life easier.",
+    "Full stack web developer portfolio showcasing projects and skills in Next.js, React, TypeScript, and full-stack development and technical blogs",
   keywords: [
-    "Shiva Bhattacharjee",
+    "Buddhsen Tripathi",
     "Full Stack Developer",
     "React",
     "Next.js",
@@ -27,9 +28,9 @@ export const metadata = {
     "Portfolio",
     "Software Engineer",
   ],
-  authors: [{ name: "Shiva Bhattacharjee" }],
-  creator: "Shiva Bhattacharjee",
-  publisher: "Shiva Bhattacharjee",
+  authors: [{ name: "Buddhsen Tripathi" }],
+  creator: "Buddhsen Tripathi",
+  publisher: "Buddhsen Tripathi",
   robots: {
     index: true,
     follow: true,
@@ -42,36 +43,36 @@ export const metadata = {
     },
   },
   icons: {
-    icon: "https://notion-avatar.app/api/svg/eyJmYWNlIjo0LCJub3NlIjozLCJtb3V0aCI6MSwiZXllcyI6MTAsImV5ZWJyb3dzIjoxLCJnbGFzc2VzIjoxMCwiaGFpciI6MzIsImFjY2Vzc29yaWVzIjowLCJkZXRhaWxzIjowLCJiZWFyZCI6MCwiZmxpcCI6MSwiY29sb3IiOiJ0cmFuc3BhcmVudCIsInNoYXBlIjoibm9uZSJ9",
+    icon: "/favicon.ico",
     shortcut: "/favicon.ico",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://shiva.codes",
-    title: "Shiva Bhattacharjee - Full Stack Developer",
+    url: "https://buddhsentripathi.com",
+    title: "Buddhsen Tripathi - Full Stack Developer",
     description:
-      "Hello there I am Shiva a full stack developer and I love to build products that make people's life easier.",
-    siteName: "Shiva Bhattacharjee Portfolio",
+      "Full stack web developer portfolio showcasing projects and skills in Next.js, React, TypeScript, and full-stack development and technical blogs",
+    siteName: "Buddhsen Tripathi Portfolio",
     images: [
       {
-        url: "https://shiva.codes/opengraph.png",
+        url: "https://buddhsentripathi.com/default-image.webp",
         width: 1200,
         height: 630,
-        alt: "Shiva Bhattacharjee - Full Stack Developer",
+        alt: "Buddhsen Tripathi Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shiva Bhattacharjee - Full Stack Developer",
+    title: "Buddhsen Tripathi - Full Stack Developer",
     description:
-      "Hello there I am Shiva a full stack developer and I love to build products that make people's life easier.",
-    images: ["https://shiva.codes/opengraph.png"],
-    creator: "@sh17va",
+      "Full stack web developer portfolio showcasing projects and skills in Next.js, React, TypeScript, and full-stack development and technical blogs",
+    images: ["https://buddhsentripathi.com/default-image.webp"],
+    creator: "@btr1pathi",
   },
   alternates: {
-    canonical: "https://shiva.codes",
+    canonical: "https://buddhsentripathi.com",
   },
 };
 
@@ -96,12 +97,12 @@ export default function RootLayout({ children }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Shiva Bhattacharjee",
+    name: "Buddhsen Tripathi",
     jobTitle: "Full Stack Developer",
     description:
-      "Full stack developer who loves to build products that make people's life easier",
-    url: "https://shiva.codes",
-    image: "https://shiva.codes/opengraph.png",
+      "Full stack web developer building scalable, user-centric applications.",
+    url: "https://buddhsentripathi.com",
+    image: "https://buddhsentripathi.com/default-image.webp",
   };
 
   return (
@@ -133,18 +134,20 @@ export default function RootLayout({ children }) {
         >
           <TopLoader />
           <SmoothScrollProvider>
-            <div className="grid min-h-[100dvh] grid-rows-[1fr_auto] overflow-x-hidden">
-              <main
-                className={`${GeistPixelSquare.className} max-w-[1800px] px-6 pt-14 md:mx-auto md:px-0 md:pt-24`}
-              >
-                <OnekoCat />
-                {children}
-              </main>
-              <Footer />
-              <NavigationBar />
-              <Toaster />
-              <ScrollToTopButton />
-            </div>
+            <ViewsProvider>
+              <div className="grid min-h-[100dvh] grid-rows-[1fr_auto] overflow-x-hidden">
+                <main
+                  className={`${GeistPixelSquare.className} max-w-[1800px] px-6 pt-14 md:mx-auto md:px-0 md:pt-24`}
+                >
+                  <OnekoCat />
+                  {children}
+                </main>
+                <Footer />
+                <NavigationBar />
+                <Toaster />
+                <ScrollToTopButton />
+              </div>
+            </ViewsProvider>
           </SmoothScrollProvider>
         </ThemeProvider>
       </body>

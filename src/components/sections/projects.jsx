@@ -33,6 +33,7 @@ const Projects = ({
   techstacks,
   status,
   link,
+  github,
   preview,
   previewDark,
   illustration,
@@ -41,10 +42,13 @@ const Projects = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const Illustration = illustration ? projectIllustrations[illustration] : null;
+  const href = stars !== null && stars !== undefined && github
+    ? `https://github.com/${github}`
+    : link;
 
   return (
     <motion.a
-      href={link}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       className="group relative block min-w-0 border border-black/[0.06] bg-black/[0.02] transition-colors hover:bg-black/[0.04] dark:border-white/[0.06] dark:bg-white/[0.03] dark:hover:bg-white/[0.05]"

@@ -12,6 +12,7 @@ import CodeEditorIcon from "@/components/icons/sparkles";
 import SuitcaseIcon from "@/components/icons/briefcase";
 import MagnifierIcon from "@/components/icons/beaker";
 import StarSparkleIcon from "@/components/icons/star-sparkle";
+import BookIcon from "@/components/icons/book";
 import {
   Tabs,
   TabsList,
@@ -25,6 +26,7 @@ const iconMap = {
   "/": HouseIcon,
   "/projects": CodeEditorIcon,
   "/experience": SuitcaseIcon,
+  "/blogs": BookIcon,
   "/hackathons": StarSparkleIcon,
   "/research": MagnifierIcon,
 };

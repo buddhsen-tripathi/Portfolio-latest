@@ -17,14 +17,18 @@ const Timeline = ({ role, company, year, type, location, logo, logoPadding, inve
 
         <div className="mb-3 flex items-start justify-between gap-2 md:mb-4 md:gap-4">
           <div className="flex min-w-0 items-center gap-2 md:gap-3">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-black/[0.08] bg-black/[0.03] dark:border-white/[0.08] dark:bg-white/[0.05] md:h-10 md:w-10 md:rounded-xl">
+            <div
+              className={`flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg md:h-10 md:w-10 md:rounded-xl ${
+                logo ? "bg-white" : "bg-black/[0.03] dark:bg-white/[0.05]"
+              }`}
+            >
               {logo ? (
                 <Image
                   src={logo}
                   alt={`${company} logo`}
                   width={40}
                   height={40}
-                  className={`h-full w-full object-contain ${logoPadding ? "p-1.5" : ""} ${invertLogo ? "dark:invert" : ""}`}
+                  className={`h-full w-full object-cover ${logoPadding ? "p-1.5" : ""} ${invertLogo ? "dark:invert" : ""}`}
                 />
               ) : (
                 <span className="text-[10px] font-bold text-muted-foreground">
