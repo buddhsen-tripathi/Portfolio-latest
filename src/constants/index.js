@@ -33,7 +33,7 @@ export const experiences = [
     company: "Amadeus",
     type: "Internship",
     location: "Bangalore, On-Site",
-    logo: "/Company/amadeus.jpg",
+    logo: "/company/amadeus.jpg",
     responsibility: [
       [
         { text: "Contributed to " },
@@ -58,7 +58,7 @@ export const experiences = [
     company: "Amadeus",
     type: "Full-Time",
     location: "Bangalore, On-Site",
-    logo: "/Company/amadeus.jpg",
+    logo: "/company/amadeus.jpg",
     responsibility: [
       [
         { text: "Built and maintained " },
